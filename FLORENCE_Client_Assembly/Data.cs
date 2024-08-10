@@ -7,6 +7,9 @@ namespace FLORENCE_Client_Assembly
         {
             public class Data
             {
+                private static FLORENCE_Client_Assembly.FrameworkSpace.ClientSpace.DataSpace.Input ptr_Input;
+                private static FLORENCE_Client_Assembly.FrameworkSpace.ClientSpace.DataSpace.Output ptr_Output;
+
                 public Data()
                 {
                     ptr_Input = new FLORENCE_Client_Assembly.FrameworkSpace.ClientSpace.DataSpace.Input();
@@ -15,17 +18,14 @@ namespace FLORENCE_Client_Assembly
                     while (ptr_Output == null) { /* wait untill created */ }
                 }
 
-                public FLORENCE_Client_Assembly.FrameworkSpace.ClientSpace.DataSpace.Input get_Input()
+                public static FLORENCE_Client_Assembly.FrameworkSpace.ClientSpace.DataSpace.Input Get_Input()
                 {
                     return ptr_Input;
                 }
-                public FLORENCE_Client_Assembly.FrameworkSpace.ClientSpace.DataSpace.Output get_Output()
+                public static FLORENCE_Client_Assembly.FrameworkSpace.ClientSpace.DataSpace.Output Get_Output()
                 {
                     return ptr_Output;
                 }
-
-                private static FLORENCE_Client_Assembly.FrameworkSpace.ClientSpace.DataSpace.Input ptr_Input;
-                private static FLORENCE_Client_Assembly.FrameworkSpace.ClientSpace.DataSpace.Output ptr_Output;
             }
         }
     }
