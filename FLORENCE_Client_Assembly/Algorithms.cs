@@ -25,7 +25,7 @@ namespace FLORENCE_Client_Assembly
                     }
                 }
 
-                public static void Thread_Listen_To_User_Peripherals()
+                public static void Thread_Listen_To_User_Peripherals(FLORENCE_Client_Assembly.FrameworkSpace.ClientSpace.DataSpace.OutputSpace.GameWindow gameWindow)
                 {
                     while (true)
                     {

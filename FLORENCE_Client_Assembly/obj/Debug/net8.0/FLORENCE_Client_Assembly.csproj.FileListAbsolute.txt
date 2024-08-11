@@ -30,3 +30,4 @@ C:\Users\Brenton Maddocks\source\repos\FLORENCE_Client_Assembly\FLORENCE_Client_
 C:\Users\Brenton Maddocks\source\repos\FLORENCE_Client_Assembly\FLORENCE_Client_Assembly\obj\Debug\net8.0\FLORENCE_Client_Assembly.genruntimeconfig.cache
 C:\Users\Brenton Maddocks\source\repos\FLORENCE_Client_Assembly\FLORENCE_Client_Assembly\obj\Debug\net8.0\ref\FLORENCE_Client_Assembly.dll
 C:\Users\Brenton Maddocks\source\repos\FLORENCE_Client_Assembly\FLORENCE_Client_Assembly\bin\Debug\net8.0\SixLabors.ImageSharp.dll
+C:\Users\Brenton Maddocks\source\repos\FLORENCE_Client_Assembly\FLORENCE_Client_Assembly\obj\Debug\net8.0\FLORENCE_Client_Assembly.sourcelink.json
