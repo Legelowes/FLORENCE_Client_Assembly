@@ -2,20 +2,19 @@
 {
     public class Framework
     {
-        private static FLORENCE_Client_Assembly.FrameworkSpace.Client ptr_Client;
+        private static FLORENCE_Client_Assembly.FrameworkSpace.Client client;
 
         public Framework()
         {
-            FLORENCE_Client_Assembly.FrameworkSpace.Client ptr_Client = new FLORENCE_Client_Assembly.FrameworkSpace.Client();
-            while (ptr_Client == null) { /* wait untill created */ }
-            FLORENCE_Client_Assembly.FrameworkSpace.ClientSpace.Algorithms.Thread_Do_Graphics();
-            FLORENCE_Client_Assembly.FrameworkSpace.ClientSpace.Execute.Initialise_Listen_To_Input_Periferals( FLORENCE_Client_Assembly.FrameworkSpace.ClientSpace.DataSpace.OutputSpace.GFX.Get_GameWindow() );
+            FLORENCE_Client_Assembly.FrameworkSpace.Client client = new FLORENCE_Client_Assembly.FrameworkSpace.Client();
+            while (client == null) { /* wait untill created */ }
+            FLORENCE_Client_Assembly.FrameworkSpace.ClientSpace.Algorithms.Thread_IO();
             //TODO Netorking
         }
 
         public static FLORENCE_Client_Assembly.FrameworkSpace.Client Get_Client()
         {
-            return ptr_Client;
+            return client;
         }
     }
 }

@@ -7,24 +7,24 @@ namespace FLORENCE_Client_Assembly
         {
             public class Data
             {
-                private static FLORENCE_Client_Assembly.FrameworkSpace.ClientSpace.DataSpace.Input ptr_Input;
-                private static FLORENCE_Client_Assembly.FrameworkSpace.ClientSpace.DataSpace.Output ptr_Output;
+                private static FLORENCE_Client_Assembly.FrameworkSpace.ClientSpace.DataSpace.Input input;
+                private static FLORENCE_Client_Assembly.FrameworkSpace.ClientSpace.DataSpace.Output output;
 
                 public Data()
                 {
-                    ptr_Input = new FLORENCE_Client_Assembly.FrameworkSpace.ClientSpace.DataSpace.Input();
-                    while (ptr_Input == null) { /* wait untill created */ }
-                    ptr_Output = new FLORENCE_Client_Assembly.FrameworkSpace.ClientSpace.DataSpace.Output();
-                    while (ptr_Output == null) { /* wait untill created */ }
+                    input = new FLORENCE_Client_Assembly.FrameworkSpace.ClientSpace.DataSpace.Input();
+                    while (input == null) { /* wait untill created */ }
+                    output = new FLORENCE_Client_Assembly.FrameworkSpace.ClientSpace.DataSpace.Output();
+                    while (output == null) { /* wait untill created */ }
                 }
 
                 public static FLORENCE_Client_Assembly.FrameworkSpace.ClientSpace.DataSpace.Input Get_Input()
                 {
-                    return ptr_Input;
+                    return input;
                 }
                 public static FLORENCE_Client_Assembly.FrameworkSpace.ClientSpace.DataSpace.Output Get_Output()
                 {
-                    return ptr_Output;
+                    return output;
                 }
             }
         }

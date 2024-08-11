@@ -5,7 +5,7 @@
         public static void Main(String[] args)
         {
             System.Console.WriteLine("FLORENCE START");
-            FLORENCE_Client_Assembly.Framework ptr_Framework = new FLORENCE_Client_Assembly.Framework();
+            FLORENCE_Client_Assembly.Framework framework = new FLORENCE_Client_Assembly.Framework();
         }
     }
 }
