@@ -11,4 +11,12 @@ Version: 22H2
 
 Version 17.10.5
 
-## Development History
+## Dependencies
+
+### OpenTK
+
+Version: 4.8.2
+
+### .Net
+
+Version: 4.8.09037
