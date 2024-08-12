@@ -8,7 +8,6 @@
         {
             FLORENCE_Client_Assembly.FrameworkSpace.Client client = new FLORENCE_Client_Assembly.FrameworkSpace.Client();
             while (client == null) { /* wait untill created */ }
-            FLORENCE_Client_Assembly.FrameworkSpace.ClientSpace.Algorithms.Thread_IO();
             //TODO Netorking
         }
 

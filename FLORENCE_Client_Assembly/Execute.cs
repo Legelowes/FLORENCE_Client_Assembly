@@ -12,11 +12,13 @@ namespace FLORENCE_Client_Assembly
                 private static FLORENCE_Client_Assembly.FrameworkSpace.ClientSpace.ExecuteSpace.Graphics graphics;
                 private static Thread listen_To_Server;
 
+                
+
                 public Execute()
                 {
                     graphics = new FLORENCE_Client_Assembly.FrameworkSpace.ClientSpace.ExecuteSpace.Graphics();
                     while (graphics == null) { /* wait untill created */ }
-                    FLORENCE_Client_Assembly.FrameworkSpace.ClientSpace.ExecuteSpace.Graphics.Initialise_Control();
+                    
 
                     listen_To_Server = new Thread(FLORENCE_Client_Assembly.FrameworkSpace.ClientSpace.Algorithms.Thread_Listen_To_Server);
                     while (listen_To_Server == null) { /* wait untill created */ }

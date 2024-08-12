@@ -1,4 +1,6 @@
 ﻿
+using System.ComponentModel;
+
 namespace FLORENCE_Client_Assembly
 {
     namespace FrameworkSpace
@@ -9,9 +11,12 @@ namespace FLORENCE_Client_Assembly
             {
                 private static FLORENCE_Client_Assembly.FrameworkSpace.ClientSpace.DataSpace.Input input;
                 private static FLORENCE_Client_Assembly.FrameworkSpace.ClientSpace.DataSpace.Output output;
+                private static FLORENCE_Client_Assembly.FrameworkSpace.ClientSpace.DataSpace.Settings settings;
 
                 public Data()
                 {
+                    settings = new FLORENCE_Client_Assembly.FrameworkSpace.ClientSpace.DataSpace.Settings();
+                    while (settings == null) { /* wait untill created */ }
                     input = new FLORENCE_Client_Assembly.FrameworkSpace.ClientSpace.DataSpace.Input();
                     while (input == null) { /* wait untill created */ }
                     output = new FLORENCE_Client_Assembly.FrameworkSpace.ClientSpace.DataSpace.Output();

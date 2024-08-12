@@ -11,39 +11,24 @@ namespace FLORENCE_Client_Assembly
         {
             namespace ExecuteSpace
             {
-                public class GameWindow
-                {
-                    public GameWindow()
-                    {
-                        
-                    }
-                }
                 public class Graphics : GameWindow
                 {
-                    private static OpenTK.Windowing.Desktop.GameWindow gameWindow;
-
-                    public Graphics() : base()
+                    public Graphics() : base(
+                        FLORENCE_Client_Assembly.FrameworkSpace.ClientSpace.DataSpace.Settings.GetGameWindowSettings(),
+                        FLORENCE_Client_Assembly.FrameworkSpace.ClientSpace.DataSpace.Settings.GetNativeWindowSettings()
+                    )
                     {
-
+                        base.Run();
                     }
 
-                    public static void Create_And_Start_3D_Graphics()
+                    protected override void OnUpdateFrame(FrameEventArgs e)
                     {
-                        gameWindow = new OpenTK.Windowing.Desktop.GameWindow(
-                            FLORENCE_Client_Assembly.FrameworkSpace.ClientSpace.ExecuteSpace.GraphicsSpace.Control_Of_Graphics.GetGameWindowSettings(),
-                            FLORENCE_Client_Assembly.FrameworkSpace.ClientSpace.ExecuteSpace.GraphicsSpace.Control_Of_Graphics.GetNativeWindowSettings()
-                        );
-                        gameWindow.Run();
-                    }
+                        base.OnUpdateFrame(e);
 
-                    public static void Initialise_Control()
-                    {
-                        FLORENCE_Client_Assembly.FrameworkSpace.ClientSpace.ExecuteSpace.GraphicsSpace.Control_Of_Graphics control_Of_Graphics = new FLORENCE_Client_Assembly.FrameworkSpace.ClientSpace.ExecuteSpace.GraphicsSpace.Control_Of_Graphics();
-                    }
-
-                    public static OpenTK.Windowing.Desktop.GameWindow Get_GameWindow()
-                    {
-                        return gameWindow;
+                        if (KeyboardState.IsKeyDown(Keys.Escape))
+                        {
+                            base.Close();
+                        }
                     }
                 }
             }
