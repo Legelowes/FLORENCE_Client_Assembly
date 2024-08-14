@@ -113,12 +113,8 @@ namespace FLORENCE_Client_Assembly
                     protected override void OnRenderFrame(FrameEventArgs e)
                     {
                         GL.Clear(ClearBufferMask.ColorBufferBit);
-
                         //Code goes here.
-                        GL.UseProgram(FLORENCE_Client_Assembly.FrameworkSpace.ClientSpace.DataSpace.OutputSpace.Shader.Get_Handle());
-
-                        GL.DrawArrays(PrimitiveType.Triangles, 0, 3);
-
+                        FLORENCE_Client_Assembly.FrameworkSpace.ClientSpace.DataSpace.OutputSpace.Map_Default.Draw_Tile();
                         Context.SwapBuffers();
                         base.OnRenderFrame(e);
                     }
