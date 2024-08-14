@@ -1,3 +1,7 @@
+#Tutorial
+https://opentk.net/learn/chapter1/2-hello-triangle.html?tabs=onload-opentk4%2Conrender-opentk4%2Cresize-opentk4
+  UpTo => 1.2 Hello Triangle : Vertex Array Object
+
 # FLORENCE - Full Stack Development
 ## Client, For Full Stack Development
 ### C#
