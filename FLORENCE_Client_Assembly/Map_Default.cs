@@ -33,16 +33,23 @@ namespace FLORENCE_Client_Assembly
                         {
                             GL.UseProgram(FLORENCE_Client_Assembly.FrameworkSpace.ClientSpace.DataSpace.OutputSpace.Shader.Get_Handle());
                             float[] vertices = { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-                            for (int i = 0; i < 5; i++)
+                            for (int i = 0; i < 6; i++)
                             {
                                 vertices[0] = (float)hexagon_Tile[i][0];
                                 vertices[1] = (float)hexagon_Tile[i][1];
                                 vertices[2] = (float)0;
-
-                                vertices[3] = (float)hexagon_Tile[i+1][0];
-                                vertices[4] = (float)hexagon_Tile[i+1][1];
-                                vertices[5] = (float)0;
-
+                                if (i != 5)
+                                {
+                                    vertices[3] = (float)hexagon_Tile[i+1][0];
+                                    vertices[4] = (float)hexagon_Tile[i+1][1];
+                                    vertices[5] = (float)0;
+                                }
+                                else
+                                {
+                                    vertices[3] = (float)hexagon_Tile[0][0];
+                                    vertices[4] = (float)hexagon_Tile[0][1];
+                                    vertices[5] = (float)0;
+                                }
                                 vertices[6] = (float)0;
                                 vertices[7] = (float)0;
                                 vertices[8] = (float)0;
