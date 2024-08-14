@@ -53,6 +53,11 @@ namespace FLORENCE_Client_Assembly
                             GC.SuppressFinalize(this);
                         }
 
+                        public static int Get_Handle()
+                        { 
+                            return (int)Handle; 
+                        }
+
                         public static void Use()
                         {
                             GL.UseProgram(Handle);

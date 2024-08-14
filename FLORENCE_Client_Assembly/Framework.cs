@@ -1,4 +1,6 @@
-﻿namespace FLORENCE_Client_Assembly
+﻿using Microsoft.VisualBasic.FileIO;
+
+namespace FLORENCE_Client_Assembly
 {
     public class Framework
     {

@@ -100,18 +100,27 @@ namespace FLORENCE_Client_Assembly
                         GL.DeleteShader(FragmentShader);
                         GL.DeleteShader(VertexShader);
 
+                        FLORENCE_Client_Assembly.FrameworkSpace.ClientSpace.DataSpace.Output.Set_VertexArrayObject(OpenTK.Graphics.OpenGL4.GL.GenVertexArray());
+                        OpenTK.Graphics.OpenGL4.GL.BindVertexArray(FLORENCE_Client_Assembly.FrameworkSpace.ClientSpace.DataSpace.Output.Get_VertexArrayObject());
+
+                        GL.VertexAttribPointer(0, 3, VertexAttribPointerType.Float, false, 3 * sizeof(float), 0);
+                        GL.EnableVertexAttribArray(0);
+
+                        FLORENCE_Client_Assembly.FrameworkSpace.ClientSpace.DataSpace.OutputSpace.Shader.Use();
                         //Code goes here
                     }
 
                     protected override void OnRenderFrame(FrameEventArgs e)
                     {
-                        base.OnRenderFrame(e);
-
                         GL.Clear(ClearBufferMask.ColorBufferBit);
 
                         //Code goes here.
+                        GL.UseProgram(FLORENCE_Client_Assembly.FrameworkSpace.ClientSpace.DataSpace.OutputSpace.Shader.Get_Handle());
 
-                        SwapBuffers();
+                        GL.DrawArrays(PrimitiveType.Triangles, 0, 3);
+
+                        Context.SwapBuffers();
+                        base.OnRenderFrame(e);
                     }
 
                     protected override void OnUpdateFrame(FrameEventArgs e)
