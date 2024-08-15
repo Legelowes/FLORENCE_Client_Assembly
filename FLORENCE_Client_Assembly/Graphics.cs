@@ -110,17 +110,36 @@ namespace FLORENCE_Client_Assembly
                         GL.VertexAttribPointer(0, 3, VertexAttribPointerType.Float, false, 3 * sizeof(float), 0);
                         GL.EnableVertexAttribArray(0);
 
+                        FLORENCE_Client_Assembly.FrameworkSpace.ClientSpace.DataSpace.Output.Set_ElementBufferObject(GL.GenBuffer());
+                        GL.BindBuffer(
+                            BufferTarget.ElementArrayBuffer, 
+                            FLORENCE_Client_Assembly.FrameworkSpace.ClientSpace.DataSpace.Output.Get_ElementBufferObject()
+                        );
+                        GL.BufferData(
+                            BufferTarget.ElementArrayBuffer,
+                            FLORENCE_Client_Assembly.FrameworkSpace.ClientSpace.DataSpace.Output.Get_Indices_Square().Length * sizeof(uint),
+                            FLORENCE_Client_Assembly.FrameworkSpace.ClientSpace.DataSpace.Output.Get_Indices_Square(), 
+                            BufferUsageHint.StreamDraw
+                        );
+
                         FLORENCE_Client_Assembly.FrameworkSpace.ClientSpace.DataSpace.OutputSpace.Shader.Use();
                         //Code goes here
                     }
 
                     protected override void OnRenderFrame(FrameEventArgs e)
                     {
+                        base.OnRenderFrame(e);
                         GL.Clear(ClearBufferMask.ColorBufferBit);
                         //Code goes here.
-                        FLORENCE_Client_Assembly.FrameworkSpace.ClientSpace.DataSpace.OutputSpace.Map_Default.Draw_Tile();
+                        //FLORENCE_Client_Assembly.FrameworkSpace.ClientSpace.DataSpace.OutputSpace.Map_Default.Draw_Tile();
+                        GL.DrawElements(
+                            PrimitiveType.Triangles,
+                            FLORENCE_Client_Assembly.FrameworkSpace.ClientSpace.DataSpace.Output.Get_Indices_Square().Length, 
+                            DrawElementsType.UnsignedInt, 
+                            0
+                        );
                         Context.SwapBuffers();
-                        base.OnRenderFrame(e);
+                        
                     }
 
                     protected override void OnUpdateFrame(FrameEventArgs e)
