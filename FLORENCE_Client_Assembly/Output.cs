@@ -23,7 +23,10 @@ namespace FLORENCE_Client_Assembly
 
                     public Output()
                     {
-                        shader = new FLORENCE_Client_Assembly.FrameworkSpace.ClientSpace.DataSpace.OutputSpace.Shader();
+                        shader = new FLORENCE_Client_Assembly.FrameworkSpace.ClientSpace.DataSpace.OutputSpace.Shader(
+                            "..\\..\\..\\shader_vert.txt",
+                            "..\\..\\..\\shader_frag.txt"
+                        );
                         while (shader == null) { /* wait untill created */ }
 
                     }

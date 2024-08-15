@@ -17,9 +17,10 @@ namespace FLORENCE_Client_Assembly
                         public static string VertexShaderSource = "..\\..\\..\\shader_vert.txt";
                         public static string FragmentShaderSource = "..\\..\\..\\shader_frag.txt";
                         
-                        public Shader()
+                        public Shader(string vertexPath, string fragmentPath)
                         {
-
+                            VertexShaderSource = File.ReadAllText(vertexPath);
+                            FragmentShaderSource = File.ReadAllText(fragmentPath);
                         }
 
                         ~Shader()
@@ -31,11 +32,6 @@ namespace FLORENCE_Client_Assembly
                             }
                         }
 
-                        public static void Initialise(string vertexPath, string fragmentPath)
-                        {
-                            VertexShaderSource = File.ReadAllText(vertexPath);
-                            FragmentShaderSource = File.ReadAllText(fragmentPath);
-                        }
                         protected virtual void Dispose(bool disposing)
                         {
                             if (!disposedValue)

@@ -52,11 +52,6 @@ namespace FLORENCE_Client_Assembly
                             BufferUsageHint.StreamDraw
                         );
 
-                        FLORENCE_Client_Assembly.FrameworkSpace.ClientSpace.DataSpace.OutputSpace.Shader.Initialise(
-                            new string("..\\..\\..\\shader_vert.txt"),
-                            new string("..\\..\\..\\shader_frag.txt")
-                        );
-
                         var VertexShader = GL.CreateShader(ShaderType.VertexShader);
                         GL.ShaderSource(VertexShader, FLORENCE_Client_Assembly.FrameworkSpace.ClientSpace.DataSpace.OutputSpace.Shader.VertexShaderSource);
 
@@ -102,7 +97,16 @@ namespace FLORENCE_Client_Assembly
 
                         FLORENCE_Client_Assembly.FrameworkSpace.ClientSpace.DataSpace.Output.Set_VertexArrayObject(OpenTK.Graphics.OpenGL4.GL.GenVertexArray());
                         OpenTK.Graphics.OpenGL4.GL.BindVertexArray(FLORENCE_Client_Assembly.FrameworkSpace.ClientSpace.DataSpace.Output.Get_VertexArrayObject());
-
+                        GL.BindBuffer(
+                            BufferTarget.ArrayBuffer, 
+                            FLORENCE_Client_Assembly.FrameworkSpace.ClientSpace.DataSpace.Output.Get_VertexBufferObject()
+                        );
+                        GL.BufferData(
+                            BufferTarget.ArrayBuffer,
+                            FLORENCE_Client_Assembly.FrameworkSpace.ClientSpace.DataSpace.Output.Get_Vertices().Length * sizeof(float), 
+                            FLORENCE_Client_Assembly.FrameworkSpace.ClientSpace.DataSpace.Output.Get_Vertices(), 
+                            BufferUsageHint.StreamDraw
+                        );
                         GL.VertexAttribPointer(0, 3, VertexAttribPointerType.Float, false, 3 * sizeof(float), 0);
                         GL.EnableVertexAttribArray(0);
 
