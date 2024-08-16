@@ -66,8 +66,8 @@ namespace FLORENCE_Client_Assembly
 
                     public static float Get_New_greenValue()
                     {
-                        timeValue += 0.0166666666666667;
-                        if(timeValue == 2000) timeValue = 0;
+                        timeValue += 0.0166666666666667;//period per frame - settings gws.UpdateFrequency = 60
+                        if (timeValue == 2000) timeValue = 0;
                         return (float)Math.Sin(timeValue) / (2.0f + 0.5f);
                     }
 

@@ -13,13 +13,15 @@ namespace FLORENCE_Client_Assembly
                 {
                     private static OpenTK.Windowing.Desktop.GameWindowSettings gws;
                     private static OpenTK.Windowing.Desktop.NativeWindowSettings nws;
+                    private static int refreshRate = new int();
 
                     public Settings()
                     {
                         gws = OpenTK.Windowing.Desktop.GameWindowSettings.Default;
                         nws = OpenTK.Windowing.Desktop.NativeWindowSettings.Default;
+                        Set_refreshRate(60);
 
-                        gws.UpdateFrequency = 60;
+                        gws.UpdateFrequency = Get_refreshRate();
 
                         nws.IsEventDriven = false;
                         nws.API = OpenTK.Windowing.Common.ContextAPI.OpenGL;
@@ -40,6 +42,16 @@ namespace FLORENCE_Client_Assembly
                     public static NativeWindowSettings GetNativeWindowSettings()
                     {
                         return nws;
+                    }
+
+                    public static int Get_refreshRate()
+                    {
+                        return refreshRate;
+                    }
+
+                    public static void Set_refreshRate(int value)
+                    {
+                        refreshRate = value;
                     }
                 }
             }
