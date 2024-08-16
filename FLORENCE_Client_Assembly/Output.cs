@@ -1,5 +1,4 @@
 ﻿using OpenTK.Graphics.OpenGL4;
-using System.ComponentModel;
 
 namespace FLORENCE_Client_Assembly
 {
@@ -12,6 +11,7 @@ namespace FLORENCE_Client_Assembly
                 public class Output
                 {
                     private static int ElementBufferObject;
+                    private static double timeValue;
                     private static int VertexArrayObject;
                     private static int VertexBufferObject;
                     private static float[] vertices_OLD = {
@@ -34,6 +34,7 @@ namespace FLORENCE_Client_Assembly
 
                     public Output()
                     {
+                        timeValue = 0;
                         shader = new FLORENCE_Client_Assembly.FrameworkSpace.ClientSpace.DataSpace.OutputSpace.Shader(
                             "..\\..\\..\\shader_vert.txt",
                             "..\\..\\..\\shader_frag.txt"
@@ -61,6 +62,13 @@ namespace FLORENCE_Client_Assembly
                     public static uint[] Get_Indices_Square()
                     {
                         return indices_square;
+                    }
+
+                    public static float Get_New_greenValue()
+                    {
+                        timeValue += 0.0166666666666667;
+                        if(timeValue == 2000) timeValue = 0;
+                        return (float)Math.Sin(timeValue) / (2.0f + 0.5f);
                     }
 
                     public static int Get_VertexArrayObject()

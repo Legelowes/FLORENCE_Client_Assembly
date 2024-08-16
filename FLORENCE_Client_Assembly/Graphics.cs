@@ -130,14 +130,24 @@ namespace FLORENCE_Client_Assembly
                     {
                         base.OnRenderFrame(e);
                         GL.Clear(ClearBufferMask.ColorBufferBit);
+
                         //Code goes here.
-                        //FLORENCE_Client_Assembly.FrameworkSpace.ClientSpace.DataSpace.OutputSpace.Map_Default.Draw_Tile();
+                        FLORENCE_Client_Assembly.FrameworkSpace.ClientSpace.DataSpace.OutputSpace.Shader.Use();
+
+                        
+                        float greenValue = FLORENCE_Client_Assembly.FrameworkSpace.ClientSpace.DataSpace.Output.Get_New_greenValue();
+                        int vertexColorLocation = GL.GetUniformLocation(FLORENCE_Client_Assembly.FrameworkSpace.ClientSpace.DataSpace.OutputSpace.Shader.Get_Handle(), "ourColor");
+                        GL.Uniform4(vertexColorLocation, 0.0f, greenValue, 0.0f, 1.0f);
+
+                        FLORENCE_Client_Assembly.FrameworkSpace.ClientSpace.DataSpace.OutputSpace.Map_Default.Draw_Tile();
+                        /*
                         GL.DrawElements(
                             PrimitiveType.Triangles,
                             FLORENCE_Client_Assembly.FrameworkSpace.ClientSpace.DataSpace.Output.Get_Indices_Square().Length, 
                             DrawElementsType.UnsignedInt, 
                             0
                         );
+                        */
                         Context.SwapBuffers();
                         
                     }
