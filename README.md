@@ -1,5 +1,5 @@
 #Tutorial
-OpenTK TUTORIAL => [https://opentk.net/learn/chapter1/4-shaders.html](https://opentk.net/learn/chapter1/5-textures.html?tabs=load-texture-opentk4)
+OpenTK TUTORIAL => https://opentk.net/learn/chapter1/5-textures.html?tabs=load-texture-opentk4
 
 1.5 Textures - Texture Filtering
 
