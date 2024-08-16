@@ -107,8 +107,24 @@ namespace FLORENCE_Client_Assembly
                             FLORENCE_Client_Assembly.FrameworkSpace.ClientSpace.DataSpace.Output.Get_Vertices(), 
                             BufferUsageHint.StreamDraw
                         );
-                        GL.VertexAttribPointer(0, 3, VertexAttribPointerType.Float, false, 3 * sizeof(float), 0);
+                        GL.VertexAttribPointer(
+                            0, 
+                            3, 
+                            VertexAttribPointerType.Float, 
+                            false, 
+                            6 * sizeof(float), 
+                            0
+                        );
                         GL.EnableVertexAttribArray(0);
+                        GL.VertexAttribPointer(
+                            1,
+                            3,
+                            VertexAttribPointerType.Float,
+                            false,
+                            6 * sizeof(float),
+                            3 * sizeof(float)
+                        );
+                        GL.EnableVertexAttribArray(1);
 
                         FLORENCE_Client_Assembly.FrameworkSpace.ClientSpace.DataSpace.Output.Set_ElementBufferObject(GL.GenBuffer());
                         GL.BindBuffer(
@@ -134,10 +150,11 @@ namespace FLORENCE_Client_Assembly
                         //Code goes here.
                         FLORENCE_Client_Assembly.FrameworkSpace.ClientSpace.DataSpace.OutputSpace.Shader.Use();
 
-                        
+                        /*
                         float greenValue = FLORENCE_Client_Assembly.FrameworkSpace.ClientSpace.DataSpace.Output.Get_New_greenValue();
                         int vertexColorLocation = GL.GetUniformLocation(FLORENCE_Client_Assembly.FrameworkSpace.ClientSpace.DataSpace.OutputSpace.Shader.Get_Handle(), "ourColor");
                         GL.Uniform4(vertexColorLocation, 0.0f, greenValue, 0.0f, 1.0f);
+                        */
 
                         FLORENCE_Client_Assembly.FrameworkSpace.ClientSpace.DataSpace.OutputSpace.Map_Default.Draw_Tile();
                         /*
