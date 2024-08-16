@@ -1,7 +1,7 @@
 #Tutorial
-https://opentk.net/learn/chapter1/2-hello-triangle.html?tabs=onload-opentk4%2Conrender-opentk4%2Cresize-opentk4
-  
-  UpTo => 1.2 Hello Triangle : Vertex Array Object
+OpenTK TUTORIAL => https://opentk.net/learn/chapter1/4-shaders.html
+
+1.4 Shaders - More Attributes
 
 # FLORENCE - Full Stack Development
 ## Client, For Full Stack Development
