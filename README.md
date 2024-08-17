@@ -1,7 +1,7 @@
-#Tutorial
-OpenTK TUTORIAL => https://opentk.net/learn/chapter1/5-textures.html?tabs=load-texture-opentk4
+# Tutorial
 
-1.5 Textures - Texture Filtering
+OpenTK TUTORIAL => https://opentk.net/learn/chapter1/4-shaders.html
+1.4 Shaders
 
 # FLORENCE - Full Stack Development
 ## Client, For Full Stack Development
