@@ -1,5 +1,4 @@
-﻿using FLORENCE_Client_Assembly.FrameworkSpace.ClientSpace.DataSpace.OutputSpace.GraphicsSpace;
-using OpenTK.Graphics.OpenGL4;
+﻿using OpenTK.Graphics.OpenGL4;
 using OpenTK.Windowing.Common;
 using OpenTK.Windowing.Desktop;
 using OpenTK.Windowing.GraphicsLibraryFramework;
@@ -111,7 +110,7 @@ namespace FLORENCE_Client_Assembly
                             GL.Clear(ClearBufferMask.ColorBufferBit);
                             shader.Use();
                         
-                            greenValue = (float)Math.Sin(periodOfRefresh) / 2.0f + 0.5f;
+                            greenValue = Get_New_greenValue();
                             int vertexColorLocation = GL.GetUniformLocation(
                                 FLORENCE_Client_Assembly.FrameworkSpace.ClientSpace.DataSpace.OutputSpace.GraphicsSpace.Shader.Get_Handle(),
                                 "ourColor"
