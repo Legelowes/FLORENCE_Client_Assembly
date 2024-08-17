@@ -15,7 +15,7 @@ namespace FLORENCE_Client_Assembly
                         public class Shader
                         {
                             private bool disposedValue = false;
-                            private static int Handle;
+                            public static int Handle;
                             public static int FragmentShader = 0;
                             public static int VertexShader = 0;
                             public static string FragmentShaderSource = "..\\..\\..\\shader_frag.txt";
@@ -103,7 +103,7 @@ namespace FLORENCE_Client_Assembly
 
                             public static int Get_Handle()
                             {
-                                return (int)Handle;
+                                return Handle;
                             }
 
                             public void Use()

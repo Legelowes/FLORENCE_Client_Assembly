@@ -1,4 +1,5 @@
-﻿using OpenTK.Graphics.OpenGL4;
+﻿using FLORENCE_Client_Assembly.FrameworkSpace.ClientSpace.DataSpace.OutputSpace.GraphicsSpace;
+using OpenTK.Graphics.OpenGL4;
 using OpenTK.Windowing.Common;
 using OpenTK.Windowing.Desktop;
 using OpenTK.Windowing.GraphicsLibraryFramework;
@@ -20,6 +21,9 @@ namespace FLORENCE_Client_Assembly
                         private static int VertexBufferObject;
                         private static int VertexArrayObject;
                         private static int ElementBufferObject;
+
+                        private static double periodOfRefresh;
+                        private static float greenValue;
 
                          public Graphics() : base(
                             FLORENCE_Client_Assembly.FrameworkSpace.ClientSpace.DataSpace.Settings.GetGameWindowSettings(),
@@ -60,7 +64,7 @@ namespace FLORENCE_Client_Assembly
                                 BufferTarget.ArrayBuffer,
                                 FLORENCE_Client_Assembly.FrameworkSpace.ClientSpace.DataSpace.Output.Get_Vertices().Length * sizeof(float),
                                 FLORENCE_Client_Assembly.FrameworkSpace.ClientSpace.DataSpace.Output.Get_Vertices(), 
-                                BufferUsageHint.StaticDraw
+                                BufferUsageHint.StreamDraw
                             );
 
                             VertexArrayObject = GL.GenVertexArray();
@@ -80,7 +84,7 @@ namespace FLORENCE_Client_Assembly
                                 "..\\..\\..\\shader_frag.txt"
                             );
                             shader.Use();
-
+/*
                             ElementBufferObject = GL.GenBuffer();
                             GL.BindBuffer(
                                 BufferTarget.ElementArrayBuffer, 
@@ -90,9 +94,12 @@ namespace FLORENCE_Client_Assembly
                                 BufferTarget.ElementArrayBuffer,
                                 FLORENCE_Client_Assembly.FrameworkSpace.ClientSpace.DataSpace.Output.Get_Indices().Length * sizeof(uint), 
                                 FLORENCE_Client_Assembly.FrameworkSpace.ClientSpace.DataSpace.Output.Get_Indices(), 
-                                BufferUsageHint.StaticDraw
+                                BufferUsageHint.StreamDraw
                             );
-
+*/
+                            int nrAttributes = 0;
+                            GL.GetInteger(GetPName.MaxVertexAttribs, out nrAttributes);
+                            Console.WriteLine("Maximum number of vertex attributes supported: " + nrAttributes);
                             //Code goes here
 
                         }
@@ -103,11 +110,22 @@ namespace FLORENCE_Client_Assembly
 
                             GL.Clear(ClearBufferMask.ColorBufferBit);
                             shader.Use();
-                            GL.BindVertexArray(VertexArrayObject);
-                            FLORENCE_Client_Assembly.FrameworkSpace.ClientSpace.DataSpace.Map_Default.Draw_Square();
-                            //FLORENCE_Client_Assembly.FrameworkSpace.ClientSpace.DataSpace.Map_Default.Draw_Triangle();
-                            //Code goes here.
+                        
+                            greenValue = (float)Math.Sin(periodOfRefresh) / 2.0f + 0.5f;
+                            int vertexColorLocation = GL.GetUniformLocation(
+                                FLORENCE_Client_Assembly.FrameworkSpace.ClientSpace.DataSpace.OutputSpace.GraphicsSpace.Shader.Get_Handle(),
+                                "ourColor"
+                            );
+                            GL.Uniform4(vertexColorLocation, 0.0f, greenValue, 0.0f, 1.0f);
 
+
+                            // now render the triangle
+                            GL.BindVertexArray(VertexArrayObject);
+                            //FLORENCE_Client_Assembly.FrameworkSpace.ClientSpace.DataSpace.Map_Default.Draw_Square();
+                            FLORENCE_Client_Assembly.FrameworkSpace.ClientSpace.DataSpace.Map_Default.Draw_Triangle();
+
+
+                            //Code goes here.
                             SwapBuffers();
                         }
 
@@ -127,14 +145,14 @@ namespace FLORENCE_Client_Assembly
                         {
                             shader.Dispose();
                         }
-                        /*
+                        
                         public static float Get_New_greenValue()
                         {
-                            timeValue += 0.0166666666666667;//period per frame - settings gws.UpdateFrequency = 60
-                            if (timeValue == 2000) timeValue = 0;
-                            return (float)Math.Sin(timeValue) / (2.0f + 0.5f);
+                            periodOfRefresh += 0.0166666666666667;//period per frame - settings gws.UpdateFrequency = 60
+                            if (periodOfRefresh == 2000) periodOfRefresh = 0;
+                            return (float)Math.Sin(periodOfRefresh) / (2.0f + 0.5f);
                         }
-                        */
+                        
                         public static FLORENCE_Client_Assembly.FrameworkSpace.ClientSpace.DataSpace.OutputSpace.GraphicsSpace.Shader Get_Shader()
                         {
                             return shader;
