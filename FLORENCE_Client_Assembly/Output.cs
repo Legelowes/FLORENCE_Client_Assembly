@@ -14,9 +14,10 @@ namespace FLORENCE_Client_Assembly
                     private static FLORENCE_Client_Assembly.FrameworkSpace.ClientSpace.DataSpace.OutputSpace.Graphics graphics;
 
                     private static float[] vertices = {
-                        -0.5f, -0.5f, 0.0f, //Bottom-left vertex
-                         0.5f, -0.5f, 0.0f, //Bottom-right vertex
-                         0.0f,  0.5f, 0.0f  //Top vertex
+                          // positions        // colors
+                          0.5f, -0.5f, 0.0f,  1.0f, 0.0f, 0.0f,   // bottom right
+                         -0.5f, -0.5f, 0.0f,  0.0f, 1.0f, 0.0f,   // bottom left
+                          0.0f,  0.5f, 0.0f,  0.0f, 0.0f, 1.0f    // top 
                     };
                     private static uint[] indices = {  // note that we start from 0!
                         0, 1, 3,   // first triangle

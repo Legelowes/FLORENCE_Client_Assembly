@@ -73,11 +73,21 @@ namespace FLORENCE_Client_Assembly
                                 3, 
                                 VertexAttribPointerType.Float, 
                                 false, 
-                                3 * sizeof(float), 
+                                6 * sizeof(float), 
                                 0
                             );
                             GL.EnableVertexAttribArray(0);
 
+                            GL.VertexAttribPointer(
+                                1, 
+                                3, 
+                                VertexAttribPointerType.Float, 
+                                false, 
+                                6 * sizeof(float), 
+                                3 * sizeof(float)
+                            );
+                            GL.EnableVertexAttribArray(1);
+                            
                             shader = new FLORENCE_Client_Assembly.FrameworkSpace.ClientSpace.DataSpace.OutputSpace.GraphicsSpace.Shader(
                                 "..\\..\\..\\shader_vert.txt",
                                 "..\\..\\..\\shader_frag.txt"
