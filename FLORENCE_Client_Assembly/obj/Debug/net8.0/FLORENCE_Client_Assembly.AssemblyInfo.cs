@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("FLORENCE_Client_Assembly")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0ca4c9e68a799bb4ae2bb791810239b26abac3e3")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ecf09f5752ce4436df2107996c92ebc85f8f7be6")]
 [assembly: System.Reflection.AssemblyProductAttribute("FLORENCE_Client_Assembly")]
 [assembly: System.Reflection.AssemblyTitleAttribute("FLORENCE_Client_Assembly")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

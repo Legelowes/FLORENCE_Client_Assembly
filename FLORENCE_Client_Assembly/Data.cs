@@ -12,7 +12,7 @@ namespace FLORENCE_Client_Assembly
                 private static FLORENCE_Client_Assembly.FrameworkSpace.ClientSpace.DataSpace.Input input;
                 private static FLORENCE_Client_Assembly.FrameworkSpace.ClientSpace.DataSpace.Output output;
                 private static FLORENCE_Client_Assembly.FrameworkSpace.ClientSpace.DataSpace.Settings settings;
-                private static FLORENCE_Client_Assembly.FrameworkSpace.ClientSpace.DataSpace.OutputSpace.Map_Default map_Default;
+                private static FLORENCE_Client_Assembly.FrameworkSpace.ClientSpace.DataSpace.Map_Default map_Default;
 
                 public Data()
                 {
@@ -22,7 +22,7 @@ namespace FLORENCE_Client_Assembly
                     while (input == null) { /* wait untill created */ }
                     output = new FLORENCE_Client_Assembly.FrameworkSpace.ClientSpace.DataSpace.Output();
                     while (output == null) { /* wait untill created */ }
-                    map_Default = new FLORENCE_Client_Assembly.FrameworkSpace.ClientSpace.DataSpace.OutputSpace.Map_Default();
+                    map_Default = new FLORENCE_Client_Assembly.FrameworkSpace.ClientSpace.DataSpace.Map_Default();
                     while (map_Default == null) { /* wait untill created */ }
                 }
 
@@ -38,7 +38,7 @@ namespace FLORENCE_Client_Assembly
                 {
                     return output;
                 }
-                public static FLORENCE_Client_Assembly.FrameworkSpace.ClientSpace.DataSpace.OutputSpace.Map_Default Get_Map_Default()
+                public static FLORENCE_Client_Assembly.FrameworkSpace.ClientSpace.DataSpace.Map_Default Get_Map_Default()
                 {
                     return map_Default;
                 }

@@ -8,7 +8,7 @@ namespace FLORENCE_Client_Assembly
 
         public Framework()
         {
-            FLORENCE_Client_Assembly.FrameworkSpace.Client client = new FLORENCE_Client_Assembly.FrameworkSpace.Client();
+            client = new FLORENCE_Client_Assembly.FrameworkSpace.Client();
             while (client == null) { /* wait untill created */ }
             //TODO Netorking
         }

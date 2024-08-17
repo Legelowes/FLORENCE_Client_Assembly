@@ -1,4 +1,6 @@
 ﻿
+using FLORENCE_Client_Assembly.FrameworkSpace.ClientSpace.DataSpace.OutputSpace;
+
 namespace FLORENCE_Client_Assembly
 {
     namespace FrameworkSpace
