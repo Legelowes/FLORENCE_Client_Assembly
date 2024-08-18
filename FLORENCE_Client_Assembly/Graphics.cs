@@ -97,7 +97,7 @@ namespace FLORENCE_Client_Assembly
                                 "..\\..\\..\\shader_frag.txt"
                             );
                             shader.Use();
-/*
+
                             ElementBufferObject = GL.GenBuffer();
                             GL.BindBuffer(
                                 BufferTarget.ElementArrayBuffer, 
@@ -109,7 +109,7 @@ namespace FLORENCE_Client_Assembly
                                 FLORENCE_Client_Assembly.FrameworkSpace.ClientSpace.DataSpace.Output.Get_Indices(), 
                                 BufferUsageHint.StreamDraw
                             );
-*/
+
                             int nrAttributes = 0;
                             GL.GetInteger(GetPName.MaxVertexAttribs, out nrAttributes);
                             Console.WriteLine("Maximum number of vertex attributes supported: " + nrAttributes);
@@ -170,8 +170,8 @@ namespace FLORENCE_Client_Assembly
 
                             // now render the triangle
                             GL.BindVertexArray(VertexArrayObject);
-                            //FLORENCE_Client_Assembly.FrameworkSpace.ClientSpace.DataSpace.Map_Default.Draw_Square();
-                            FLORENCE_Client_Assembly.FrameworkSpace.ClientSpace.DataSpace.Map_Default.Draw_Triangle();
+                            FLORENCE_Client_Assembly.FrameworkSpace.ClientSpace.DataSpace.Map_Default.Draw_Square();
+                            //FLORENCE_Client_Assembly.FrameworkSpace.ClientSpace.DataSpace.Map_Default.Draw_Triangle();
 
 
                             //Code goes here.
