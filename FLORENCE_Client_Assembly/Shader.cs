@@ -79,12 +79,12 @@ namespace FLORENCE_Client_Assembly
                                     Console.WriteLine("GPU Resource leak! Did you forget to call Dispose()?");
                                 }
                             }
-
+                            /*
                             public int GetAttribLocation(string attribName)
                             {
                                 return GL.GetAttribLocation(Handle, attribName);
                             }
-
+                            */
                             protected virtual void Dispose(bool disposing)
                             {
                                 if (!disposedValue)

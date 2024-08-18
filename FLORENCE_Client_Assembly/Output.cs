@@ -14,14 +14,20 @@ namespace FLORENCE_Client_Assembly
                     private static FLORENCE_Client_Assembly.FrameworkSpace.ClientSpace.DataSpace.OutputSpace.Graphics graphics;
 
                     private static float[] vertices = {
-                          // positions        // colors
-                          0.5f, -0.5f, 0.0f,  1.0f, 0.0f, 0.0f,   // bottom right
-                         -0.5f, -0.5f, 0.0f,  0.0f, 1.0f, 0.0f,   // bottom left
-                          0.0f,  0.5f, 0.0f,  0.0f, 0.0f, 1.0f    // top 
+                        //Position          Texture coordinates
+                         0.5f,  0.5f, 0.0f, 1.0f, 1.0f, // top right
+                         0.5f, -0.5f, 0.0f, 1.0f, 0.0f, // bottom right
+                        -0.5f, -0.5f, 0.0f, 0.0f, 0.0f, // bottom left
+                        -0.5f,  0.5f, 0.0f, 0.0f, 1.0f  // top left
                     };
                     private static uint[] indices = {  // note that we start from 0!
                         0, 1, 3,   // first triangle
                         1, 2, 3    // second triangle
+                    };
+                    private static float[] texCoords = {
+                        0.0f, 0.0f,  // lower-left corner  
+                        1.0f, 0.0f,  // lower-right corner
+                        0.5f, 1.0f   // top-center corner
                     };
                     public static void Initalise_Graphics()
                     {

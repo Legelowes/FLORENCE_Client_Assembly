@@ -9,7 +9,8 @@
       "FLORENCE_Client_Assembly/1.0.0": {
         "dependencies": {
           "OpenTK": "4.8.2",
-          "SixLabors.ImageSharp": "3.1.5"
+          "SixLabors.ImageSharp": "3.1.5",
+          "StbImageSharp": "2.27.14"
         },
         "runtime": {
           "FLORENCE_Client_Assembly.dll": {}
@@ -167,6 +168,14 @@
           }
         }
       },
+      "StbImageSharp/2.27.14": {
+        "runtime": {
+          "lib/netstandard2.0/StbImageSharp.dll": {
+            "assemblyVersion": "2.27.14.0",
+            "fileVersion": "2.27.14.0"
+          }
+        }
+      },
       "System.Runtime.CompilerServices.Unsafe/5.0.0": {}
     }
   },
@@ -259,6 +268,13 @@
       "sha512": "sha512-lNtlq7dSI/QEbYey+A0xn48z5w4XHSffF8222cC4F4YwTXfEImuiBavQcWjr49LThT/pRmtWJRcqA/PlL+eJ6g==",
       "path": "sixlabors.imagesharp/3.1.5",
       "hashPath": "sixlabors.imagesharp.3.1.5.nupkg.sha512"
+    },
+    "StbImageSharp/2.27.14": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-4C38oL8igoocaywMr4+WDYoXwnVma3gm26heCAVgzWqO91MMPuhgqTlTT7vVpGDMo4/c0h2/zqQuAS6QxJKgmA==",
+      "path": "stbimagesharp/2.27.14",
+      "hashPath": "stbimagesharp.2.27.14.nupkg.sha512"
     },
     "System.Runtime.CompilerServices.Unsafe/5.0.0": {
       "type": "package",

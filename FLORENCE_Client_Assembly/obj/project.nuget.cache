@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "Iut8GmkWrSI=",
+  "dgSpecHash": "YaYx9+N8bLA=",
   "success": true,
-  "projectFilePath": "C:\\Users\\Brenton Maddocks\\Source\\Repos\\FLORENCE_Client_Assembly\\FLORENCE_Client_Assembly\\FLORENCE_Client_Assembly.csproj",
+  "projectFilePath": "C:\\Users\\Brenton Maddocks\\source\\repos\\FLORENCE_Client_Assembly\\FLORENCE_Client_Assembly\\FLORENCE_Client_Assembly.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Brenton Maddocks\\.nuget\\packages\\opentk\\4.8.2\\opentk.4.8.2.nupkg.sha512",
     "C:\\Users\\Brenton Maddocks\\.nuget\\packages\\opentk.audio.openal\\4.8.2\\opentk.audio.openal.4.8.2.nupkg.sha512",
@@ -16,6 +16,7 @@
     "C:\\Users\\Brenton Maddocks\\.nuget\\packages\\opentk.windowing.desktop\\4.8.2\\opentk.windowing.desktop.4.8.2.nupkg.sha512",
     "C:\\Users\\Brenton Maddocks\\.nuget\\packages\\opentk.windowing.graphicslibraryframework\\4.8.2\\opentk.windowing.graphicslibraryframework.4.8.2.nupkg.sha512",
     "C:\\Users\\Brenton Maddocks\\.nuget\\packages\\sixlabors.imagesharp\\3.1.5\\sixlabors.imagesharp.3.1.5.nupkg.sha512",
+    "C:\\Users\\Brenton Maddocks\\.nuget\\packages\\stbimagesharp\\2.27.14\\stbimagesharp.2.27.14.nupkg.sha512",
     "C:\\Users\\Brenton Maddocks\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\5.0.0\\system.runtime.compilerservices.unsafe.5.0.0.nupkg.sha512"
   ],
   "logs": []

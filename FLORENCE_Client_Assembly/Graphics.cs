@@ -2,6 +2,8 @@
 using OpenTK.Windowing.Common;
 using OpenTK.Windowing.Desktop;
 using OpenTK.Windowing.GraphicsLibraryFramework;
+using StbImageSharp;
+using System.IO;
 
 namespace FLORENCE_Client_Assembly
 {
@@ -16,6 +18,7 @@ namespace FLORENCE_Client_Assembly
                     public class Graphics : GameWindow
                     {
                         private static FLORENCE_Client_Assembly.FrameworkSpace.ClientSpace.DataSpace.OutputSpace.GraphicsSpace.Shader shader;
+                        private static FLORENCE_Client_Assembly.FrameworkSpace.ClientSpace.DataSpace.OutputSpace.GraphicsSpace.Texture texture;
 
                         private static int VertexBufferObject;
                         private static int VertexArrayObject;
@@ -73,17 +76,18 @@ namespace FLORENCE_Client_Assembly
                                 3, 
                                 VertexAttribPointerType.Float, 
                                 false, 
-                                6 * sizeof(float), 
+                                5 * sizeof(float), 
                                 0
                             );
                             GL.EnableVertexAttribArray(0);
 
+                            //int texCoordLocation = shader.GetAttribLocation("aTexCoord");
                             GL.VertexAttribPointer(
                                 1, 
-                                3, 
+                                2, 
                                 VertexAttribPointerType.Float, 
                                 false, 
-                                6 * sizeof(float), 
+                                5 * sizeof(float), 
                                 3 * sizeof(float)
                             );
                             GL.EnableVertexAttribArray(1);
@@ -109,6 +113,42 @@ namespace FLORENCE_Client_Assembly
                             int nrAttributes = 0;
                             GL.GetInteger(GetPName.MaxVertexAttribs, out nrAttributes);
                             Console.WriteLine("Maximum number of vertex attributes supported: " + nrAttributes);
+
+                            GL.TexParameter(
+                                TextureTarget.Texture2D, 
+                                TextureParameterName.TextureWrapS, 
+                                (int)TextureWrapMode.Repeat
+                            );
+                            GL.TexParameter(
+                                TextureTarget.Texture2D, 
+                                TextureParameterName.TextureWrapT, 
+                                (int)TextureWrapMode.Repeat
+                            );
+
+                            GL.TexParameter(
+                                TextureTarget.Texture2D, 
+                                TextureParameterName.TextureMinFilter, 
+                                (int)TextureMinFilter.Nearest
+                            );
+                            GL.TexParameter(
+                                TextureTarget.Texture2D, 
+                                TextureParameterName.TextureMagFilter, 
+                                (int)TextureMagFilter.Linear
+                            );
+
+                            GL.TexParameter(
+                                TextureTarget.Texture2D, 
+                                TextureParameterName.TextureMinFilter, 
+                                (int)TextureMinFilter.LinearMipmapLinear
+                            );
+                            GL.TexParameter(
+                                TextureTarget.Texture2D, 
+                                TextureParameterName.TextureMagFilter, 
+                                (int)TextureMagFilter.Linear
+                            );
+
+                            texture = new FLORENCE_Client_Assembly.FrameworkSpace.ClientSpace.DataSpace.OutputSpace.GraphicsSpace.Texture("..\\..\\..\\Textures\\container.jpg");
+                            GL.GenerateMipmap(GenerateMipmapTarget.Texture2D);
                             //Code goes here
 
                         }
