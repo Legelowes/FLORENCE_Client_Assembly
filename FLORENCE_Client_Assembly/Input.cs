@@ -1,5 +1,5 @@
 ﻿
-namespace FLORENCE_Client_Assembly
+namespace FLORENCE_Client
 {
     namespace FrameworkSpace
     {

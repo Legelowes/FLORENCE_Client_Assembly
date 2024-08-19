@@ -1,6 +1,6 @@
 ﻿using OpenTK.Graphics.OpenGL4;
 
-namespace FLORENCE_Client_Assembly
+namespace FLORENCE_Client
 {
     namespace FrameworkSpace
     {
@@ -15,11 +15,11 @@ namespace FLORENCE_Client_Assembly
                         public class Shader
                         {
                             private bool disposedValue = false;
-                            public static int Handle;
-                            public static int FragmentShader = 0;
-                            public static int VertexShader = 0;
-                            public static string FragmentShaderSource = "..\\..\\..\\shader_frag.txt";
-                            public static string VertexShaderSource = "..\\..\\..\\shader_vert.txt";
+                            private static int Handle = 0;
+                            private static int FragmentShader = 0;
+                            private static int VertexShader = 0;
+                            private static string FragmentShaderSource = "..\\..\\..\\shader_frag.txt";
+                            private static string VertexShaderSource = "..\\..\\..\\shader_vert.txt";
                             
                             public Shader(string vertexPath, string fragmentPath)
                             {
@@ -69,6 +69,38 @@ namespace FLORENCE_Client_Assembly
                                 GL.DeleteShader(FragmentShader);
                                 GL.DeleteShader(VertexShader);
 
+                                GL.TexParameter(
+                                    TextureTarget.Texture2D,
+                                    TextureParameterName.TextureWrapS,
+                                    (int)TextureWrapMode.Repeat
+                                );
+                                GL.TexParameter(
+                                    TextureTarget.Texture2D,
+                                    TextureParameterName.TextureWrapT,
+                                    (int)TextureWrapMode.Repeat
+                                );
+
+                                GL.TexParameter(
+                                    TextureTarget.Texture2D,
+                                    TextureParameterName.TextureMinFilter,
+                                    (int)TextureMinFilter.Nearest
+                                );
+                                GL.TexParameter(
+                                    TextureTarget.Texture2D,
+                                    TextureParameterName.TextureMagFilter,
+                                    (int)TextureMagFilter.Linear
+                                );
+
+                                GL.TexParameter(
+                                    TextureTarget.Texture2D,
+                                    TextureParameterName.TextureMinFilter,
+                                    (int)TextureMinFilter.LinearMipmapLinear
+                                );
+                                GL.TexParameter(
+                                    TextureTarget.Texture2D,
+                                    TextureParameterName.TextureMagFilter,
+                                    (int)TextureMagFilter.Linear
+                                );
                             }
 
                             ~Shader()
@@ -101,7 +133,7 @@ namespace FLORENCE_Client_Assembly
                                 GC.SuppressFinalize(this);
                             }
 
-                            public static int Get_Handle()
+                            public int Get_Handle()
                             {
                                 return Handle;
                             }
@@ -111,7 +143,7 @@ namespace FLORENCE_Client_Assembly
                                 GL.UseProgram(Handle);
                             }
 
-                            public static void Set_Handle(int value)
+                            public void Set_Handle(int value)
                             {
                                 Handle = value;
                             }

@@ -8,6 +8,6 @@ build_property.PlatformNeutralAssembly =
 build_property.EnforceExtendedAnalyzerRules = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = FLORENCE_Client_Assembly
-build_property.ProjectDir = C:\Users\Brenton Maddocks\source\repos\FLORENCE_Client_Assembly\FLORENCE_Client_Assembly\
+build_property.ProjectDir = C:\Users\Brenton Maddocks\Source\Repos\FLORENCE_Client_Assembly\FLORENCE_Client_Assembly\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 

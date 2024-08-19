@@ -1,31 +1,34 @@
-﻿namespace FLORENCE_Client_Assembly
+﻿namespace FLORENCE_Client
 {
     namespace FrameworkSpace
     {
         public class Client
         {
-            private static FLORENCE_Client_Assembly.FrameworkSpace.ClientSpace.Algorithms algorothms;
-            private static FLORENCE_Client_Assembly.FrameworkSpace.ClientSpace.Data data;
-            private static FLORENCE_Client_Assembly.FrameworkSpace.ClientSpace.Execute execute;
+            private FLORENCE_Client.FrameworkSpace.ClientSpace.Algorithms algorothms = new FLORENCE_Client.FrameworkSpace.ClientSpace.Algorithms();
+            private FLORENCE_Client.FrameworkSpace.ClientSpace.Data data = new FLORENCE_Client.FrameworkSpace.ClientSpace.Data();
+            private FLORENCE_Client.FrameworkSpace.ClientSpace.Execute execute = new FLORENCE_Client.FrameworkSpace.ClientSpace.Execute();
 
             public Client()
             {
-                algorothms = new FLORENCE_Client_Assembly.FrameworkSpace.ClientSpace.Algorithms();
+                
                 while (algorothms == null) { /* wait untill created */ }
-                data = new FLORENCE_Client_Assembly.FrameworkSpace.ClientSpace.Data();
+                
                 while (data == null) { /* wait untill created */ }
-                execute = new FLORENCE_Client_Assembly.FrameworkSpace.ClientSpace.Execute();
+                
                 while (execute == null) { /* wait untill created */ }
             }
-            public static FLORENCE_Client_Assembly.FrameworkSpace.ClientSpace.Algorithms Get_Algorithms()
+
+            public FLORENCE_Client.FrameworkSpace.ClientSpace.Algorithms Get_Algorithms()
             {
                 return algorothms;
             }
-            public static FLORENCE_Client_Assembly.FrameworkSpace.ClientSpace.Data Get_Data()
+
+            public FLORENCE_Client.FrameworkSpace.ClientSpace.Data Get_Data()
             {
                 return data;
             }
-            public static FLORENCE_Client_Assembly.FrameworkSpace.ClientSpace.Execute Get_Execute()
+
+            public FLORENCE_Client.FrameworkSpace.ClientSpace.Execute Get_Execute()
             {
                 return execute;
             }

@@ -1,7 +1,7 @@
 ﻿
 using OpenTK.Windowing.Desktop;
 
-namespace FLORENCE_Client_Assembly
+namespace FLORENCE_Client
 {
     namespace FrameworkSpace
     {
@@ -11,14 +11,14 @@ namespace FLORENCE_Client_Assembly
             {
                 public class Settings
                 {
-                    private static OpenTK.Windowing.Desktop.GameWindowSettings gws;
-                    private static OpenTK.Windowing.Desktop.NativeWindowSettings nws;
-                    private static int refreshRate = new int();
+                    private static OpenTK.Windowing.Desktop.GameWindowSettings gws = OpenTK.Windowing.Desktop.GameWindowSettings.Default;
+                    private static OpenTK.Windowing.Desktop.NativeWindowSettings nws = OpenTK.Windowing.Desktop.NativeWindowSettings.Default;
+                    private static int refreshRate = 60;
 
                     public Settings()
                     {
-                        gws = OpenTK.Windowing.Desktop.GameWindowSettings.Default;
-                        nws = OpenTK.Windowing.Desktop.NativeWindowSettings.Default;
+                        while (gws == null) { /* wait untill created */ }
+                        while (nws == null) { /* wait untill created */ }
                         Set_refreshRate(60);
 
                         gws.UpdateFrequency = Get_refreshRate();
@@ -34,22 +34,22 @@ namespace FLORENCE_Client_Assembly
                         nws.Title = "FLORENCE";
                     }
 
-                    public static GameWindowSettings GetGameWindowSettings()
+                    public GameWindowSettings GetGameWindowSettings()
                     {
                         return gws;
                     }
 
-                    public static NativeWindowSettings GetNativeWindowSettings()
+                    public NativeWindowSettings GetNativeWindowSettings()
                     {
                         return nws;
                     }
 
-                    public static int Get_refreshRate()
+                    public int Get_refreshRate()
                     {
                         return refreshRate;
                     }
 
-                    public static void Set_refreshRate(int value)
+                    public void Set_refreshRate(int value)
                     {
                         refreshRate = value;
                     }

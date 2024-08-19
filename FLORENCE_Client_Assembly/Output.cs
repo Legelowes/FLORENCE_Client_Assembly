@@ -1,7 +1,7 @@
-﻿using FLORENCE_Client_Assembly.FrameworkSpace.ClientSpace.DataSpace.OutputSpace;
+﻿using FLORENCE_Client.FrameworkSpace.ClientSpace.DataSpace.OutputSpace;
 using OpenTK.Graphics.OpenGL4;
 
-namespace FLORENCE_Client_Assembly
+namespace FLORENCE_Client
 {
     namespace FrameworkSpace
     {
@@ -11,12 +11,12 @@ namespace FLORENCE_Client_Assembly
             {
                 public class Output
                 {
-                    private static FLORENCE_Client_Assembly.FrameworkSpace.ClientSpace.DataSpace.OutputSpace.Graphics graphics;
+                    private FLORENCE_Client.FrameworkSpace.ClientSpace.DataSpace.OutputSpace.Graphics graphics;
 
                     private static float[] vertices = {
                         //Position          Texture coordinates
-                         0.5f,  0.5f, 0.0f, 1.0f, 1.0f, // top right
-                         0.5f, -0.5f, 0.0f, 1.0f, 0.0f, // bottom right
+                        0.5f,  0.5f, 0.0f, 1.0f, 1.0f, // top right
+                        0.5f, -0.5f, 0.0f, 1.0f, 0.0f, // bottom right
                         -0.5f, -0.5f, 0.0f, 0.0f, 0.0f, // bottom left
                         -0.5f,  0.5f, 0.0f, 0.0f, 1.0f  // top left
                     };
@@ -29,23 +29,29 @@ namespace FLORENCE_Client_Assembly
                         1.0f, 0.0f,  // lower-right corner
                         0.5f, 1.0f   // top-center corner
                     };
-                    public static void Initalise_Graphics()
+
+                    public Output()
                     {
-                        graphics = new FLORENCE_Client_Assembly.FrameworkSpace.ClientSpace.DataSpace.OutputSpace.Graphics();
+
+                    }
+
+                    public void Initalise_Graphics(FLORENCE_Client.FrameworkSpace.ClientSpace.Data data_pass)
+                    {
+                        graphics = new FLORENCE_Client.FrameworkSpace.ClientSpace.DataSpace.OutputSpace.Graphics(data_pass);
                         while (graphics == null) { /* wait untill created */ }
                     }
 
-                    public static FLORENCE_Client_Assembly.FrameworkSpace.ClientSpace.DataSpace.OutputSpace.Graphics Get_Graphics()
+                    public FLORENCE_Client.FrameworkSpace.ClientSpace.DataSpace.OutputSpace.Graphics Get_Graphics()
                     {
                         return graphics;
                     }
 
-                    public static uint[] Get_Indices()
+                    public uint[] Get_Indices()
                     {
                         return indices;
                     }
 
-                    public static float[] Get_Vertices()
+                    public float[] Get_Vertices()
                     {
                         return vertices;
                     }

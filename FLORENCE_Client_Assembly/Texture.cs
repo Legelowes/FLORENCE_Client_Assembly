@@ -3,7 +3,7 @@ using System.IO;
 using OpenTK.Graphics.OpenGL4;
 using StbImageSharp;
 
-namespace FLORENCE_Client_Assembly
+namespace FLORENCE_Client
 {
     namespace FrameworkSpace
     {
@@ -17,11 +17,11 @@ namespace FLORENCE_Client_Assembly
                     {
                         public class Texture
                         {
-                            private static int Handle;
+                            private static int Handle = 0;
 
                             public Texture(string path_To_Image)
                             {
-                                Handle = GL.GenTexture();
+                                Set_Handle( GL.GenTexture() );
                                 Use();
                                 StbImage.stbi_set_flip_vertically_on_load(1);
                                 ImageResult image = ImageResult.FromStream(
@@ -39,12 +39,56 @@ namespace FLORENCE_Client_Assembly
                                     PixelType.UnsignedByte, 
                                     image.Data
                                 );
-                                
+
+                                GL.TexParameter(
+                                    TextureTarget.Texture2D,
+                                    TextureParameterName.TextureWrapS,
+                                    (int)TextureWrapMode.Repeat
+                                );
+                                GL.TexParameter(
+                                    TextureTarget.Texture2D,
+                                    TextureParameterName.TextureWrapT,
+                                    (int)TextureWrapMode.Repeat
+                                );
+
+                                GL.TexParameter(
+                                    TextureTarget.Texture2D,
+                                    TextureParameterName.TextureMinFilter,
+                                    (int)TextureMinFilter.Nearest
+                                );
+                                GL.TexParameter(
+                                    TextureTarget.Texture2D,
+                                    TextureParameterName.TextureMagFilter,
+                                    (int)TextureMagFilter.Linear
+                                );
+
+                                GL.TexParameter(
+                                    TextureTarget.Texture2D,
+                                    TextureParameterName.TextureMinFilter,
+                                    (int)TextureMinFilter.LinearMipmapLinear
+                                );
+                                GL.TexParameter(
+                                    TextureTarget.Texture2D,
+                                    TextureParameterName.TextureMagFilter,
+                                    (int)TextureMagFilter.Linear
+                                );
+
+                                GL.GenerateMipmap(GenerateMipmapTarget.Texture2D);
                             }
 
-                            public static void Use()
+                            public void Use()
                             {
-                                GL.BindTexture(TextureTarget.Texture2D, Handle);
+                                GL.BindTexture(TextureTarget.Texture2D, Get_Handle());
+                            }
+
+                            public int Get_Handle()
+                            {
+                                return Handle;
+                            }
+
+                            public void Set_Handle(int value)
+                            {
+                                Handle = value;
                             }
                         }
                     }

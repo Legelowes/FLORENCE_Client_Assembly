@@ -3,7 +3,7 @@ using System;
 using System.Drawing;
 using System.Runtime.InteropServices;
 
-namespace FLORENCE_Client_Assembly
+namespace FLORENCE_Client
 {
     namespace FrameworkSpace
     {
@@ -14,8 +14,8 @@ namespace FLORENCE_Client_Assembly
                 public class Map_Default
                 {
                     public static int amountOfDots = 6;
-                    public static double[] hexagon_Tile;
-                    public static double[] hexagon_corner_Colour;
+                    public static double[] hexagon_Tile = { 0 };
+                    public static double[] hexagon_corner_Colour = { 0 };
                     public static int radius = 10;
 
                     public Map_Default()
@@ -81,22 +81,22 @@ namespace FLORENCE_Client_Assembly
                         hexagon_corner_Colour[20] = (double)1.0f;
                     }
 
-                    public static void Draw_Square()
+                    public void Draw_Square(FLORENCE_Client.FrameworkSpace.ClientSpace.Data data)
                     {
                         GL.DrawElements(
-                            PrimitiveType.Triangles, 
-                            FLORENCE_Client_Assembly.FrameworkSpace.ClientSpace.DataSpace.Output.Get_Indices().Length, 
+                            PrimitiveType.Triangles,
+                            data.Get_Output().Get_Indices().Length, 
                             DrawElementsType.UnsignedInt, 
                             0
                         );
                     }
 
-                    public static void Draw_Triangle()
+                    public void Draw_Triangle()
                     {
                         GL.DrawArrays(PrimitiveType.Triangles, 0, 3);
                     }
 
-                    public static void Draw_Hexagon()
+                    public void Draw_Hexagon()
                     {
 
                         float[] vertices = { 
@@ -149,7 +149,7 @@ namespace FLORENCE_Client_Assembly
                         }
                     }
 
-                    public static double[] Get_Vertices()
+                    public double[] Get_Hexagon()
                     {
                         return hexagon_Tile;
                     }
