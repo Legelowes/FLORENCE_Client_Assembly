@@ -1,7 +1,8 @@
 # Tutorial
 
-OpenTK TUTORIAL => https://opentk.net/learn/chapter1/2-hello-triangle.html?tabs=onload-opentk4%2Conrender-opentk4%2Cresize-opentk4
-1.2 Hello triangle
+OpenTK TUTORIAL => https://opentk.net/learn/chapter1/5-textures.html?tabs=load-texture-opentk4
+
+1.5. Textures
 
 # FLORENCE - Full Stack Development
 ## Client, For Full Stack Development
