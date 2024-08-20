@@ -1,4 +1,5 @@
-﻿using OpenTK.Graphics.OpenGL4;
+﻿using FLORENCE_Client.FrameworkSpace.ClientSpace.DataSpace.OutputSpace.GraphicsSpace;
+using OpenTK.Graphics.OpenGL4;
 using OpenTK.Windowing.Common;
 using OpenTK.Windowing.Desktop;
 using OpenTK.Windowing.GraphicsLibraryFramework;
@@ -16,20 +17,13 @@ namespace FLORENCE_Client
                 {
                     public class Graphics : GameWindow
                     {
-                        private readonly float[] vertices = {
-                            -0.5f, -0.5f, 0.0f, //Bottom-left vertex
-                             0.5f, -0.5f, 0.0f, //Bottom-right vertex
-                             0.0f,  0.5f, 0.0f  //Top vertex
-                        };
-                        
+                        private int ElementBufferObject;
                         private int VertexArrayObject;
                         private int VertexBufferObject;
                         private FLORENCE_Client.FrameworkSpace.ClientSpace.DataSpace.OutputSpace.GraphicsSpace.Shader shader;
-                        //private int ElementBufferObject;
-
+                        
                         private static int nrAttributes;
                         private static double periodOfRefresh;
-                        private static float greenValue;
 
                         public Graphics(OpenTK.Windowing.Desktop.GameWindowSettings gws, OpenTK.Windowing.Desktop.NativeWindowSettings nws) : base(
                            gws,
@@ -56,19 +50,60 @@ namespace FLORENCE_Client
                             VertexBufferObject = GL.GenBuffer();
                             GL.BindVertexArray(VertexBufferObject);
                             
-                            GL.BindBuffer(BufferTarget.ArrayBuffer, VertexBufferObject);
-                            GL.BufferData(BufferTarget.ArrayBuffer, vertices.Length * sizeof(float), vertices, BufferUsageHint.StaticDraw);
+                            GL.BindBuffer(
+                                BufferTarget.ArrayBuffer, 
+                                VertexBufferObject
+                            );
+                            GL.BufferData(
+                                BufferTarget.ArrayBuffer,
+                                FLORENCE_Client.Program.Get_Framework().Get_Client().Get_Data().Get_Output().Get_Vertices().Length * sizeof(float),
+                                FLORENCE_Client.Program.Get_Framework().Get_Client().Get_Data().Get_Output().Get_Vertices(), 
+                                BufferUsageHint.StaticDraw
+                            );
 
                             VertexArrayObject = GL.GenVertexArray();
                             GL.BindVertexArray(VertexArrayObject);
 
-                            GL.VertexAttribPointer(0, 3, VertexAttribPointerType.Float, false, 3 * sizeof(float), 0);
+                            GL.VertexAttribPointer(
+                                0, 
+                                3, 
+                                VertexAttribPointerType.Float, 
+                                false, 
+                                6 * sizeof(float), 
+                                0
+                            );
                             GL.EnableVertexAttribArray(0);
-                      
+
+                            GL.VertexAttribPointer(
+                                1, 
+                                3, 
+                                VertexAttribPointerType.Float, 
+                                false, 
+                                6 * sizeof(float), 
+                                3 * sizeof(float)
+                            );
+                            GL.EnableVertexAttribArray(1);
+
                             shader = new FLORENCE_Client.FrameworkSpace.ClientSpace.DataSpace.OutputSpace.GraphicsSpace.Shader(
                                 "..\\..\\..\\shader_vert.glsl",
                                 "..\\..\\..\\shader_frag.glsl");
                             shader.Use();
+                            // draw square \/ \/ \/
+                            ElementBufferObject = GL.GenBuffer();
+                            GL.BindBuffer(
+                                BufferTarget.ElementArrayBuffer, 
+                                ElementBufferObject
+                            );
+                            GL.BufferData(
+                                BufferTarget.ElementArrayBuffer,
+                                FLORENCE_Client.Program.Get_Framework().Get_Client().Get_Data().Get_Output().Get_Indices().Length * sizeof(uint), 
+                                FLORENCE_Client.Program.Get_Framework().Get_Client().Get_Data().Get_Output().Get_Indices(),
+                                BufferUsageHint.StaticDraw
+                            );
+                            // draw square /\ /\ /\
+                            nrAttributes = 0;
+                            GL.GetInteger(GetPName.MaxVertexAttribs, out nrAttributes);
+                            Console.WriteLine("Maximum number of vertex attributes supported: " + nrAttributes);
                         }
 
                         protected override void OnRenderFrame(FrameEventArgs e)
@@ -76,7 +111,14 @@ namespace FLORENCE_Client
                             base.OnRenderFrame(e);
                             GL.Clear(ClearBufferMask.ColorBufferBit);
                             shader.Use();
+
+                            float greenValue = Get_New_greenValue();
+                            int vertexColorLocation = GL.GetUniformLocation(shader.Get_Handle(), "ourColor");
+                            GL.Uniform4(vertexColorLocation, 0.0f, greenValue, 0.0f, 1.0f);
+
                             GL.BindVertexArray(VertexArrayObject);
+                            FLORENCE_Client.Program.Get_Framework().Get_Client().Get_Data().Get_Map_Default().Draw_Triangle();
+                            //FLORENCE_Client.Program.Get_Framework().Get_Client().Get_Data().Get_Map_Default().Draw_Square(FLORENCE_Client.Program.Get_Framework().Get_Client().Get_Data());
                             GL.DrawArrays(PrimitiveType.Triangles, 0, 3);
                             SwapBuffers();
                         }
