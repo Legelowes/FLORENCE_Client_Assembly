@@ -34,9 +34,9 @@ namespace FLORENCE_Client
                         nws_4_Boot.APIVersion = Version.Parse(input: "4.1");
                         nws_4_Boot.AutoLoadBindings = true;
                         nws_4_Boot.Location = new OpenTK.Mathematics.Vector2i(x: 0, y: 0);
-                        nws_4_Boot.ClientSize = new OpenTK.Mathematics.Vector2i(x: 1, y: 1);
-                        nws_4_Boot.StartFocused = false;
-                        nws_4_Boot.StartVisible = false;
+                        nws_4_Boot.ClientSize = new OpenTK.Mathematics.Vector2i(x: 100, y: 100);
+                        nws_4_Boot.StartFocused = true;
+                        nws_4_Boot.StartVisible = true;
                         nws_4_Boot.Title = "Loading";
 
                         this.gws = OpenTK.Windowing.Desktop.GameWindowSettings.Default;

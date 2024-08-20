@@ -1,5 +1,7 @@
 ﻿using FLORENCE_Client.FrameworkSpace.ClientSpace.DataSpace.OutputSpace;
 using OpenTK.Graphics.OpenGL4;
+using OpenTK.Windowing.Desktop;
+using OpenTK.Windowing.GraphicsLibraryFramework;
 
 namespace FLORENCE_Client
 {
@@ -11,7 +13,7 @@ namespace FLORENCE_Client
             {
                 public class Output
                 {
-                    private FLORENCE_Client.FrameworkSpace.ClientSpace.DataSpace.OutputSpace.Graphics graphics;
+                    //private FLORENCE_Client.FrameworkSpace.ClientSpace.DataSpace.OutputSpace.Graphics graphics;
 
                     private static float[] vertices = {
                         -0.5f, -0.5f, 0.0f, //Bottom-left vertex
@@ -30,24 +32,18 @@ namespace FLORENCE_Client
 
                     public Output()
                     {
-                        this.graphics = new FLORENCE_Client.FrameworkSpace.ClientSpace.DataSpace.OutputSpace.Graphics(
-                            FLORENCE_Client.FrameworkSpace.ClientSpace.DataSpace.Settings.GetGameWindowSettings4Boot(),
-                            FLORENCE_Client.FrameworkSpace.ClientSpace.DataSpace.Settings.GetNativeWindowSettings4Boot()
-                        );
-                    }
 
-                    public void Initalise_Graphics(FLORENCE_Client.FrameworkSpace.ClientSpace.Data data_pass)
+                    }
+                    public void Initalise_Graphics()
                     {
-                        this.graphics = new FLORENCE_Client.FrameworkSpace.ClientSpace.DataSpace.OutputSpace.Graphics(
+                        using (var graphics = new FLORENCE_Client.FrameworkSpace.ClientSpace.DataSpace.OutputSpace.Graphics(
                             FLORENCE_Client.Program.Get_Framework().Get_Client().Get_Data().Get_Settings().GetGameWindowSettings(),
                             FLORENCE_Client.Program.Get_Framework().Get_Client().Get_Data().Get_Settings().GetNativeWindowSettings()
-                        );
-                        while (this.graphics == null) { /* wait untill created */ }
-                    }
-
-                    public FLORENCE_Client.FrameworkSpace.ClientSpace.DataSpace.OutputSpace.Graphics Get_Graphics()
-                    {
-                        return this.graphics;
+                        ))
+                        {
+                            FLORENCE_Client.FrameworkSpace.ClientSpace.DataSpace.Settings.Set_systemInitialised( true );
+                            graphics.Run();
+                        }
                     }
 
                     public uint[] Get_Indices()

@@ -11,7 +11,7 @@ namespace FLORENCE_Client
             this.client = new FLORENCE_Client.FrameworkSpace.Client();
             while (this.client == null) { /* wait untill created */ }
 
-            this.client.Get_Execute().Initialise_Client(client);
+            
             //TODO Netorking
         }
 

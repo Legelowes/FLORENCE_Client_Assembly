@@ -15,22 +15,24 @@ namespace FLORENCE_Client
                 {
                     public class Graphics : GameWindow
                     {
-                        private static int VertexBufferObject;
-                        private static int VertexArrayObject;
-                        private static int ElementBufferObject;
+                        //private FLORENCE_Client.FrameworkSpace.ClientSpace.DataSpace.OutputSpace.Shader shader;
+
+                        private int VertexBufferObject;
+                        private int VertexArrayObject;
+                        //private int ElementBufferObject;
 
                         private static int nrAttributes;
                         private static double periodOfRefresh;
                         private static float greenValue;
 
-                         public Graphics(OpenTK.Windowing.Desktop.GameWindowSettings gws, OpenTK.Windowing.Desktop.NativeWindowSettings nws) : base(
-                            gws,
-                            nws
-                        )
+                        public Graphics(OpenTK.Windowing.Desktop.GameWindowSettings gws, OpenTK.Windowing.Desktop.NativeWindowSettings nws) : base(
+                           gws,
+                           nws
+                       )
                         {
-                            base.Run();
+                            //this.shader = new FLORENCE_Client.FrameworkSpace.ClientSpace.DataSpace.OutputSpace.Shader("\\..\\..\\..\\shader_vert.glsl", "\\..\\..\\..\\shader_frag.glsl");
                         }
-                        
+
                         ~Graphics()
                         {
 
@@ -44,53 +46,70 @@ namespace FLORENCE_Client
 
                         protected override void OnLoad()
                         {
+                            base.OnLoad();
                             switch (FLORENCE_Client.FrameworkSpace.ClientSpace.DataSpace.Settings.Get_systemInitialised())
                             {
                                 case false:
-                                    base.OnLoad();
+                                {
                                     GL.ClearColor(0.2f, 0.3f, 0.3f, 1.0f);
-                                    break;
-                                    
+                                }
+                                break;
+
                                 case true:
-                                    base.OnLoad();
-
-                                    GL.ClearColor(0.2f, 0.3f, 0.3f, 1.0f);
-
-                                    VertexBufferObject = GL.GenBuffer();
-                                    GL.BindBuffer(
-                                        BufferTarget.ArrayBuffer,
-                                        VertexBufferObject
-                                    );
-                                    GL.BufferData(
-                                        BufferTarget.ArrayBuffer,
-                                        FLORENCE_Client.Program.Get_Framework().Get_Client().Get_Data().Get_Output().Get_Vertices().Length * sizeof(float),
-                                        FLORENCE_Client.Program.Get_Framework().Get_Client().Get_Data().Get_Output().Get_Vertices(),
-                                        BufferUsageHint.StreamDraw
-                                    );
-                                    //Code goes here
-
-                                    break;
+                                {
+                                     GL.ClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+                                }
+                                break;
                             }
                         }
 
                         protected override void OnRenderFrame(FrameEventArgs e)
                         {
                             base.OnRenderFrame(e);
+                            switch (FLORENCE_Client.FrameworkSpace.ClientSpace.DataSpace.Settings.Get_systemInitialised())
+                            {
+                                case false:
+                                    {
 
-                            GL.Clear(ClearBufferMask.ColorBufferBit);
+                                    }
+                                    break;
 
-                            //Code goes here.
+                                case true:
+                                    {
+                                        GL.Clear(ClearBufferMask.ColorBufferBit);
 
-                            SwapBuffers();
+                                        //Code goes here.
+
+                                        this.SwapBuffers();
+                                    }
+                                    break;
+                            }
+                        }
+
+                        protected override void OnUnload()
+                        {
+                            base.OnUnload();
                         }
 
                         protected override void OnUpdateFrame(FrameEventArgs e)
                         {
                             base.OnUpdateFrame(e);
-
-                            if (KeyboardState.IsKeyDown(Keys.Escape))
+                            switch (FLORENCE_Client.FrameworkSpace.ClientSpace.DataSpace.Settings.Get_systemInitialised())
                             {
-                                Close();
+                                case false:
+                                    {
+
+                                    }
+                                    break;
+
+                                case true:
+                                    {
+                                        if (KeyboardState.IsKeyDown(Keys.Escape))
+                                        {
+                                            this.Close();
+                                        }
+                                    }
+                                    break;
                             }
                         }
 

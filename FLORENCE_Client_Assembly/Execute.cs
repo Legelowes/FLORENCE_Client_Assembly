@@ -16,13 +16,6 @@ namespace FLORENCE_Client
                     while (this.listen_To_Server == null) { /* wait untill created */ }
                     this.listen_To_Server.Start();
                 }
-
-                public void Initialise_Client(FLORENCE_Client.FrameworkSpace.Client ptr_client)
-                {
-                    ptr_client.Get_Data().Get_Output().Initalise_Graphics(ptr_client.Get_Data());
-                    FLORENCE_Client.FrameworkSpace.ClientSpace.DataSpace.Settings.Set_systemInitialised(true);
-                }
-
             }
         }
     }
