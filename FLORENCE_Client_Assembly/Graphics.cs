@@ -21,7 +21,8 @@ namespace FLORENCE_Client
                         private int VertexArrayObject;
                         private int VertexBufferObject;
                         private FLORENCE_Client.FrameworkSpace.ClientSpace.DataSpace.OutputSpace.GraphicsSpace.Shader shader;
-                        
+                        private FLORENCE_Client.FrameworkSpace.ClientSpace.DataSpace.OutputSpace.GraphicsSpace.Texture texture;
+
                         private static int nrAttributes;
                         private static double periodOfRefresh;
 
@@ -69,7 +70,7 @@ namespace FLORENCE_Client
                                 3, 
                                 VertexAttribPointerType.Float, 
                                 false, 
-                                6 * sizeof(float), 
+                                5 * sizeof(float), 
                                 0
                             );
                             GL.EnableVertexAttribArray(0);
@@ -79,7 +80,7 @@ namespace FLORENCE_Client
                                 3, 
                                 VertexAttribPointerType.Float, 
                                 false, 
-                                6 * sizeof(float), 
+                                5 * sizeof(float), 
                                 3 * sizeof(float)
                             );
                             GL.EnableVertexAttribArray(1);
@@ -104,6 +105,17 @@ namespace FLORENCE_Client
                             nrAttributes = 0;
                             GL.GetInteger(GetPName.MaxVertexAttribs, out nrAttributes);
                             Console.WriteLine("Maximum number of vertex attributes supported: " + nrAttributes);
+
+                            GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureWrapS, (int)TextureWrapMode.Repeat);
+                            GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureWrapT, (int)TextureWrapMode.Repeat);
+
+                            GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMinFilter, (int)TextureMinFilter.Nearest);
+                            GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMagFilter, (int)TextureMagFilter.Linear);
+
+                            GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMinFilter, (int)TextureMinFilter.LinearMipmapLinear);
+                            GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMagFilter, (int)TextureMagFilter.Linear);
+
+                            texture = new FLORENCE_Client.FrameworkSpace.ClientSpace.DataSpace.OutputSpace.GraphicsSpace.Texture("..\\..\\..\\Textures\\container.jpg");
                         }
 
                         protected override void OnRenderFrame(FrameEventArgs e)
@@ -117,8 +129,8 @@ namespace FLORENCE_Client
                             GL.Uniform4(vertexColorLocation, 0.0f, greenValue, 0.0f, 1.0f);
 
                             GL.BindVertexArray(VertexArrayObject);
-                            FLORENCE_Client.Program.Get_Framework().Get_Client().Get_Data().Get_Map_Default().Draw_Triangle();
-                            //FLORENCE_Client.Program.Get_Framework().Get_Client().Get_Data().Get_Map_Default().Draw_Square(FLORENCE_Client.Program.Get_Framework().Get_Client().Get_Data());
+                            //FLORENCE_Client.Program.Get_Framework().Get_Client().Get_Data().Get_Map_Default().Draw_Triangle();
+                            FLORENCE_Client.Program.Get_Framework().Get_Client().Get_Data().Get_Map_Default().Draw_Square(FLORENCE_Client.Program.Get_Framework().Get_Client().Get_Data());
                             GL.DrawArrays(PrimitiveType.Triangles, 0, 3);
                             SwapBuffers();
                         }
