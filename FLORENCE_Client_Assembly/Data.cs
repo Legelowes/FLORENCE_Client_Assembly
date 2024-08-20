@@ -16,6 +16,7 @@ namespace FLORENCE_Client
 
                 public Data()
                 {
+                    System.Console.WriteLine("FLORENCE: Data");
                     this.settings = new FLORENCE_Client.FrameworkSpace.ClientSpace.DataSpace.Settings();
                     while (this.settings == null) { /* wait untill created */ }
                     this.input = new FLORENCE_Client.FrameworkSpace.ClientSpace.DataSpace.Input();

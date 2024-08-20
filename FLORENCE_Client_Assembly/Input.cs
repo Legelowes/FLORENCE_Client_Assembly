@@ -11,7 +11,7 @@ namespace FLORENCE_Client
                 {
                     public Input()
                     {
-                    
+                        System.Console.WriteLine("FLORENCE: Input");
                     }
                 }
             }

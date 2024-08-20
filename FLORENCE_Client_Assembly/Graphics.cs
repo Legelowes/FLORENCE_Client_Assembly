@@ -30,6 +30,7 @@ namespace FLORENCE_Client
                            nws
                        )
                         {
+                            System.Console.WriteLine("FLORENCE: Graphics & GameWindow");
                             //this.shader = new FLORENCE_Client.FrameworkSpace.ClientSpace.DataSpace.OutputSpace.Shader("\\..\\..\\..\\shader_vert.glsl", "\\..\\..\\..\\shader_frag.glsl");
                         }
 

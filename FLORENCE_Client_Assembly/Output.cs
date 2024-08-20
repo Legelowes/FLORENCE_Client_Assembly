@@ -32,7 +32,7 @@ namespace FLORENCE_Client
 
                     public Output()
                     {
-
+                        System.Console.WriteLine("FLORENCE: Output");
                     }
                     public void Initalise_Graphics()
                     {

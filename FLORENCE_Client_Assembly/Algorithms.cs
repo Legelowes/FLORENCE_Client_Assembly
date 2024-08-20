@@ -11,7 +11,7 @@ namespace FLORENCE_Client
             {
                 public Algorithms()
                 {
-
+                    System.Console.WriteLine("FLORENCE: Algorithms");
                 }
 
                 public static void Thread_Listen_To_Server()

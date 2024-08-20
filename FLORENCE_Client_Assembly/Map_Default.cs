@@ -19,6 +19,8 @@ namespace FLORENCE_Client
 
                     public Map_Default()
                     {
+
+                        System.Console.WriteLine("FLORENCE: Map_Default");
                         hexagon_Tile = new double[21];
 
                         hexagon_Tile[0] = (double)0;

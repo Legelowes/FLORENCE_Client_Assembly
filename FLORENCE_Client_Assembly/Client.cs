@@ -10,6 +10,7 @@
 
             public Client()
             {
+                System.Console.WriteLine("FLORENCE: Client");
                 this.algorothms = new FLORENCE_Client.FrameworkSpace.ClientSpace.Algorithms();
                 while (this.algorothms == null) { /* wait untill created */ }
                 this.data = new FLORENCE_Client.FrameworkSpace.ClientSpace.Data();
