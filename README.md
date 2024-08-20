@@ -1,7 +1,7 @@
 # Tutorial
 
-OpenTK TUTORIAL => https://opentk.net/learn/chapter1/3-element-buffer-objects.html
-1.3. Element buffer objects
+OpenTK TUTORIAL => https://opentk.net/learn/chapter1/2-hello-triangle.html?tabs=onload-opentk4%2Conrender-opentk4%2Cresize-opentk4
+1.2 Hello triangle
 
 # FLORENCE - Full Stack Development
 ## Client, For Full Stack Development
