@@ -1,7 +1,8 @@
 # Tutorial
 
-OpenTK TUTORIAL => https://opentk.net/learn/chapter1/6-multiple-textures.html
-1.6. Multiple textures
+OpenTK TUTORIAL => https://opentk.net/learn/chapter1/5-textures.html?tabs=load-texture-opentk4
+
+1.5. Textures
 
 # FLORENCE - Full Stack Development
 ## Client, For Full Stack Development

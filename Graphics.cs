@@ -3,7 +3,6 @@ using OpenTK.Mathematics;
 using OpenTK.Windowing.Common;
 using OpenTK.Windowing.GraphicsLibraryFramework;
 using OpenTK.Windowing.Desktop;
-using FLORENCE_Client.FrameworkSpace.ClientSpace.DataSpace.OutputSpace.GraphicsSpace;
 
 namespace FLORENCE_Client
 {
@@ -111,12 +110,12 @@ namespace FLORENCE_Client
                             texture1 = new FLORENCE_Client.FrameworkSpace.ClientSpace.DataSpace.OutputSpace.GraphicsSpace.Texture("..\\..\\..\\Textures\\awesomeface.png");
                             texture1.Use(TextureUnit.Texture1);
 
-                            shader.SetInt("texture0", 0);
-                            shader.SetInt("texture1", 1);
-
                             nrAttributes = 0;
                             GL.GetInteger(GetPName.MaxVertexAttribs, out nrAttributes);
                             Console.WriteLine("Maximum number of vertex attributes supported: " + nrAttributes);
+
+                            shader.SetInt("texture0", 0);
+                            shader.SetInt("texture1", 1);
 
                             GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureWrapS, (int)TextureWrapMode.Repeat);
                             GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureWrapT, (int)TextureWrapMode.Repeat);
@@ -136,16 +135,26 @@ namespace FLORENCE_Client
 
                             GL.BindVertexArray(VertexArrayObject);
 
+                            var transform = Matrix4.Identity;
+
+                            transform = transform * Matrix4.CreateRotationZ(MathHelper.DegreesToRadians(90.0f));
+
+                            transform = transform * Matrix4.CreateScale(0.5f, 0.5f, 0.5f);
+
+                            transform = transform * Matrix4.CreateTranslation(0.1f, 0.1f, 0.0f);
+
                             texture0.Use(TextureUnit.Texture0);
                             texture1.Use(TextureUnit.Texture1);
                             shader.Use();
 
+                            shader.SetMatrix4("transform", transform);
+/*
 // change colour with time \/ \/ \/
                             float greenValue = Get_New_greenValue();
                             int vertexColorLocation = GL.GetUniformLocation(shader.Get_Handle(), "ourColor");
                             GL.Uniform4(vertexColorLocation, 0.0f, greenValue, 0.0f, 1.0f);
 // change colour with time /\ /\ /\
-
+*/
                             //FLORENCE_Client.Program.Get_Framework().Get_Client().Get_Data().Get_Map_Default().Draw_Triangle();
                             FLORENCE_Client.Program.Get_Framework().Get_Client().Get_Data().Get_Map_Default().Draw_Square(FLORENCE_Client.Program.Get_Framework().Get_Client().Get_Data());
                             

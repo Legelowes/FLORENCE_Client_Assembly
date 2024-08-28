@@ -1,4 +1,6 @@
 ﻿using OpenTK.Graphics.OpenGL4;
+using OpenTK.Mathematics;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace FLORENCE_Client
 {
@@ -14,23 +16,16 @@ namespace FLORENCE_Client
                     {
                         public class Shader
                         {
-                            int Handle, VertexShader, FragmentShader;
+                            public int Handle, VertexShader, FragmentShader;
                             private bool disposedValue = false;
+                            private readonly Dictionary<string, int> uniformLocations;
 
                             public Shader(string vertexPath, string fragmentPath)
                             {
                                 string VertexShaderSource = File.ReadAllText(vertexPath);
-
-                                string FragmentShaderSource = File.ReadAllText(fragmentPath);
-
                                 VertexShader = GL.CreateShader(ShaderType.VertexShader);
                                 GL.ShaderSource(VertexShader, VertexShaderSource);
-
-                                FragmentShader = GL.CreateShader(ShaderType.FragmentShader);
-                                GL.ShaderSource(FragmentShader, FragmentShaderSource);
-
                                 GL.CompileShader(VertexShader);
-
                                 GL.GetShader(VertexShader, ShaderParameter.CompileStatus, out int success_a);
                                 if (success_a == 0)
                                 {
@@ -38,8 +33,10 @@ namespace FLORENCE_Client
                                     Console.WriteLine(infoLog);
                                 }
 
+                                string FragmentShaderSource = File.ReadAllText(fragmentPath);
+                                FragmentShader = GL.CreateShader(ShaderType.FragmentShader);
+                                GL.ShaderSource(FragmentShader, FragmentShaderSource);
                                 GL.CompileShader(FragmentShader);
-
                                 GL.GetShader(FragmentShader, ShaderParameter.CompileStatus, out int success_b);
                                 if (success_b == 0)
                                 {
@@ -54,17 +51,26 @@ namespace FLORENCE_Client
 
                                 GL.LinkProgram(Handle);
 
-                                GL.GetProgram(Handle, GetProgramParameterName.LinkStatus, out int success);
-                                if (success == 0)
-                                {
-                                    string infoLog = GL.GetProgramInfoLog(Handle);
-                                    Console.WriteLine(infoLog);
-                                }
-
                                 GL.DetachShader(Handle, VertexShader);
                                 GL.DetachShader(Handle, FragmentShader);
                                 GL.DeleteShader(FragmentShader);
                                 GL.DeleteShader(VertexShader);
+
+                                GL.GetProgram(Handle, GetProgramParameterName.ActiveUniforms, out var numberOfUniforms);
+
+                                uniformLocations = new Dictionary<string, int>();
+                                for (var i = 0; i < numberOfUniforms; i++)
+                                {
+                                    // get the name of this uniform,
+                                    var key = GL.GetActiveUniform(Handle, i, out _, out _);
+
+                                    // get the location,
+                                    var location = GL.GetUniformLocation(Handle, key);
+
+                                    // and then add it to the dictionary.
+                                    uniformLocations.Add(key, location);
+                                }
+
                             }
 
                             ~Shader()
@@ -73,6 +79,40 @@ namespace FLORENCE_Client
                                 {
                                     Console.WriteLine("GPU Resource leak! Did you forget to call Dispose()?");
                                 }
+                            }
+
+                            private static void CompileShader(int shader)
+                            {
+                                // Try to compile the shader
+                                GL.CompileShader(shader);
+
+                                // Check for compilation errors
+                                GL.GetShader(shader, ShaderParameter.CompileStatus, out var code);
+                                if (code != (int)All.True)
+                                {
+                                    // We can use `GL.GetShaderInfoLog(shader)` to get information about the error.
+                                    var infoLog = GL.GetShaderInfoLog(shader);
+                                    throw new Exception($"Error occurred whilst compiling Shader({shader}).\n\n{infoLog}");
+                                }
+                            }
+
+                            private static void LinkProgram(int program)
+                            {
+                                // We link the program
+                                GL.LinkProgram(program);
+
+                                // Check for linking errors
+                                GL.GetProgram(program, GetProgramParameterName.LinkStatus, out var code);
+                                if (code != (int)All.True)
+                                {
+                                    // We can use `GL.GetProgramInfoLog(program)` to get information about the error.
+                                    throw new Exception($"Error occurred whilst linking Program({program})");
+                                }
+                            }
+
+                            public int GetAttribLocation(string attribName)
+                            {
+                                return GL.GetAttribLocation(Handle, attribName);
                             }
 
                             public void Dispose()
@@ -91,11 +131,28 @@ namespace FLORENCE_Client
                                 }
                             }
 
-                            public void SetInt(string name, int value)
+                            public void SetInt(string name, int data)
                             {
-                                int location = GL.GetUniformLocation(Handle, name);
+                                GL.UseProgram(Handle);
+                                GL.Uniform1(uniformLocations[name], data);
+                            }
 
-                                GL.Uniform1(location, value);
+                            public void SetFloat(string name, float data)
+                            {
+                                GL.UseProgram(Handle);
+                                GL.Uniform1(uniformLocations[name], data);
+                            }
+
+                            public void SetMatrix4(string name, Matrix4 data)
+                            {
+                                GL.UseProgram(Handle);
+                                GL.UniformMatrix4(uniformLocations[name], true, ref data);
+                            }
+
+                            public void SetVector3(string name, Vector3 data)
+                            {
+                                GL.UseProgram(Handle);
+                                GL.Uniform3(uniformLocations[name], data);
                             }
 
                             public void Use()
