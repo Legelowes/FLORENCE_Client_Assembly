@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.10.35122.118
+VisualStudioVersion = 17.11.35219.272
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FLORENCE_Client_Assembly", "FLORENCE_Client_Assembly\FLORENCE_Client_Assembly.csproj", "{AEEBC4C8-ED7E-42EA-8CE4-69A2F89CCE6C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FLORENCE_Client_Assembly", "FLORENCE_Client_Assembly.csproj", "{80A8451E-B869-45DB-B24D-763154CBDA1E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{AEEBC4C8-ED7E-42EA-8CE4-69A2F89CCE6C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{AEEBC4C8-ED7E-42EA-8CE4-69A2F89CCE6C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{AEEBC4C8-ED7E-42EA-8CE4-69A2F89CCE6C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{AEEBC4C8-ED7E-42EA-8CE4-69A2F89CCE6C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{80A8451E-B869-45DB-B24D-763154CBDA1E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{80A8451E-B869-45DB-B24D-763154CBDA1E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{80A8451E-B869-45DB-B24D-763154CBDA1E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{80A8451E-B869-45DB-B24D-763154CBDA1E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {8D220CF3-0A22-41B1-A104-FEEC549BEB37}
+		SolutionGuid = {EA7740A4-7690-489A-A2BC-2805E2B7B150}
 	EndGlobalSection
 EndGlobal

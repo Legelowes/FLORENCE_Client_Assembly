@@ -1,8 +1,9 @@
-﻿using FLORENCE_Client.FrameworkSpace.ClientSpace.DataSpace.OutputSpace.GraphicsSpace;
-using OpenTK.Graphics.OpenGL4;
+﻿using OpenTK.Graphics.OpenGL4;
+using OpenTK.Mathematics;
 using OpenTK.Windowing.Common;
-using OpenTK.Windowing.Desktop;
 using OpenTK.Windowing.GraphicsLibraryFramework;
+using OpenTK.Windowing.Desktop;
+using FLORENCE_Client.FrameworkSpace.ClientSpace.DataSpace.OutputSpace.GraphicsSpace;
 
 namespace FLORENCE_Client
 {
@@ -16,20 +17,15 @@ namespace FLORENCE_Client
                 {
                     public class Graphics : GameWindow
                     {
-                        private readonly float[] vertices = {
-                            -0.5f, -0.5f, 0.0f, //Bottom-left vertex
-                             0.5f, -0.5f, 0.0f, //Bottom-right vertex
-                             0.0f,  0.5f, 0.0f  //Top vertex
-                        };
-                        
+                        private int ElementBufferObject;
                         private int VertexArrayObject;
                         private int VertexBufferObject;
                         private FLORENCE_Client.FrameworkSpace.ClientSpace.DataSpace.OutputSpace.GraphicsSpace.Shader shader;
-                        //private int ElementBufferObject;
+                        private FLORENCE_Client.FrameworkSpace.ClientSpace.DataSpace.OutputSpace.GraphicsSpace.Texture texture0;
+                        private FLORENCE_Client.FrameworkSpace.ClientSpace.DataSpace.OutputSpace.GraphicsSpace.Texture texture1;
 
                         private static int nrAttributes;
                         private static double periodOfRefresh;
-                        private static float greenValue;
 
                         public Graphics(OpenTK.Windowing.Desktop.GameWindowSettings gws, OpenTK.Windowing.Desktop.NativeWindowSettings nws) : base(
                            gws,
@@ -53,31 +49,106 @@ namespace FLORENCE_Client
                         {
                             base.OnLoad();
                             GL.ClearColor(0.2f, 0.3f, 0.3f, 1.0f);
-                            VertexBufferObject = GL.GenBuffer();
-                            GL.BindVertexArray(VertexBufferObject);
-                            
-                            GL.BindBuffer(BufferTarget.ArrayBuffer, VertexBufferObject);
-                            GL.BufferData(BufferTarget.ArrayBuffer, vertices.Length * sizeof(float), vertices, BufferUsageHint.StaticDraw);
 
                             VertexArrayObject = GL.GenVertexArray();
                             GL.BindVertexArray(VertexArrayObject);
 
-                            GL.VertexAttribPointer(0, 3, VertexAttribPointerType.Float, false, 3 * sizeof(float), 0);
-                            GL.EnableVertexAttribArray(0);
-                      
-                            shader = new Shader(
-                                "C:\\Users\\Brenton Maddocks\\source\\repos\\FLORENCE_Client_Assembly\\FLORENCE_Client_Assembly\\shader_vert.glsl", 
-                                "C:\\Users\\Brenton Maddocks\\source\\repos\\FLORENCE_Client_Assembly\\FLORENCE_Client_Assembly\\shader_frag.glsl");
+                            VertexBufferObject = GL.GenBuffer();
+                            GL.BindBuffer(
+                                BufferTarget.ArrayBuffer, 
+                                VertexBufferObject
+                            );
+                            GL.BufferData(
+                                BufferTarget.ArrayBuffer,
+                                FLORENCE_Client.Program.Get_Framework().Get_Client().Get_Data().Get_Output().Get_Vertices().Length * sizeof(float),
+                                FLORENCE_Client.Program.Get_Framework().Get_Client().Get_Data().Get_Output().Get_Vertices(), 
+                                BufferUsageHint.StaticDraw
+                            );
+
+                            // draw square \/ \/ \/
+                            ElementBufferObject = GL.GenBuffer();
+                            GL.BindBuffer(
+                                BufferTarget.ElementArrayBuffer,
+                                ElementBufferObject
+                            );
+                            GL.BufferData(
+                                BufferTarget.ElementArrayBuffer,
+                                FLORENCE_Client.Program.Get_Framework().Get_Client().Get_Data().Get_Output().Get_Indices().Length * sizeof(uint),
+                                FLORENCE_Client.Program.Get_Framework().Get_Client().Get_Data().Get_Output().Get_Indices(),
+                                BufferUsageHint.StaticDraw
+                            );
+                            // draw square /\ /\ /\
+
+                            shader = new FLORENCE_Client.FrameworkSpace.ClientSpace.DataSpace.OutputSpace.GraphicsSpace.Shader(
+                                "..\\..\\..\\shader_vert.glsl",
+                                "..\\..\\..\\shader_frag.glsl"
+                            );
                             shader.Use();
+
+                            GL.VertexAttribPointer(
+                                0, 
+                                3, 
+                                VertexAttribPointerType.Float, 
+                                false, 
+                                5 * sizeof(float), 
+                                0
+                            );
+                            GL.EnableVertexAttribArray(0);
+
+                            GL.VertexAttribPointer(
+                                1, 
+                                3, 
+                                VertexAttribPointerType.Float, 
+                                false, 
+                                5 * sizeof(float), 
+                                3 * sizeof(float)
+                            );
+                            GL.EnableVertexAttribArray(1);
+
+                            texture0 = new FLORENCE_Client.FrameworkSpace.ClientSpace.DataSpace.OutputSpace.GraphicsSpace.Texture("..\\..\\..\\Textures\\container.jpg");
+                            texture0.Use(TextureUnit.Texture0);
+
+                            texture1 = new FLORENCE_Client.FrameworkSpace.ClientSpace.DataSpace.OutputSpace.GraphicsSpace.Texture("..\\..\\..\\Textures\\awesomeface.png");
+                            texture1.Use(TextureUnit.Texture1);
+
+                            shader.SetInt("texture0", 0);
+                            shader.SetInt("texture1", 1);
+
+                            nrAttributes = 0;
+                            GL.GetInteger(GetPName.MaxVertexAttribs, out nrAttributes);
+                            Console.WriteLine("Maximum number of vertex attributes supported: " + nrAttributes);
+
+                            GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureWrapS, (int)TextureWrapMode.Repeat);
+                            GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureWrapT, (int)TextureWrapMode.Repeat);
+
+                            GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMinFilter, (int)TextureMinFilter.Nearest);
+                            GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMagFilter, (int)TextureMagFilter.Linear);
+
+                            GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMinFilter, (int)TextureMinFilter.LinearMipmapLinear);
+                            GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMagFilter, (int)TextureMagFilter.Linear);
                         }
 
                         protected override void OnRenderFrame(FrameEventArgs e)
                         {
                             base.OnRenderFrame(e);
+
                             GL.Clear(ClearBufferMask.ColorBufferBit);
-                            shader.Use();
+
                             GL.BindVertexArray(VertexArrayObject);
-                            GL.DrawArrays(PrimitiveType.Triangles, 0, 3);
+
+                            texture0.Use(TextureUnit.Texture0);
+                            texture1.Use(TextureUnit.Texture1);
+                            shader.Use();
+
+// change colour with time \/ \/ \/
+                            float greenValue = Get_New_greenValue();
+                            int vertexColorLocation = GL.GetUniformLocation(shader.Get_Handle(), "ourColor");
+                            GL.Uniform4(vertexColorLocation, 0.0f, greenValue, 0.0f, 1.0f);
+// change colour with time /\ /\ /\
+
+                            //FLORENCE_Client.Program.Get_Framework().Get_Client().Get_Data().Get_Map_Default().Draw_Triangle();
+                            FLORENCE_Client.Program.Get_Framework().Get_Client().Get_Data().Get_Map_Default().Draw_Square(FLORENCE_Client.Program.Get_Framework().Get_Client().Get_Data());
+                            
                             SwapBuffers();
                         }
 

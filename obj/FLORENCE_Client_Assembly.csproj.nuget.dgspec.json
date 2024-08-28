@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Brenton Maddocks\\source\\repos\\FLORENCE_Client_Assembly\\FLORENCE_Client_Assembly\\FLORENCE_Client_Assembly.csproj": {}
+    "C:\\Users\\Legel.DESKTOP-RKOK0RG\\source\\repos\\FLORENCE_Client_Assembly\\FLORENCE_Client_Assembly.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Brenton Maddocks\\source\\repos\\FLORENCE_Client_Assembly\\FLORENCE_Client_Assembly\\FLORENCE_Client_Assembly.csproj": {
+    "C:\\Users\\Legel.DESKTOP-RKOK0RG\\source\\repos\\FLORENCE_Client_Assembly\\FLORENCE_Client_Assembly.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Brenton Maddocks\\source\\repos\\FLORENCE_Client_Assembly\\FLORENCE_Client_Assembly\\FLORENCE_Client_Assembly.csproj",
+        "projectUniqueName": "C:\\Users\\Legel.DESKTOP-RKOK0RG\\source\\repos\\FLORENCE_Client_Assembly\\FLORENCE_Client_Assembly.csproj",
         "projectName": "FLORENCE_Client_Assembly",
-        "projectPath": "C:\\Users\\Brenton Maddocks\\source\\repos\\FLORENCE_Client_Assembly\\FLORENCE_Client_Assembly\\FLORENCE_Client_Assembly.csproj",
-        "packagesPath": "C:\\Users\\Brenton Maddocks\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Brenton Maddocks\\source\\repos\\FLORENCE_Client_Assembly\\FLORENCE_Client_Assembly\\obj\\",
+        "projectPath": "C:\\Users\\Legel.DESKTOP-RKOK0RG\\source\\repos\\FLORENCE_Client_Assembly\\FLORENCE_Client_Assembly.csproj",
+        "packagesPath": "C:\\Users\\Legel.DESKTOP-RKOK0RG\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Legel.DESKTOP-RKOK0RG\\source\\repos\\FLORENCE_Client_Assembly\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\Brenton Maddocks\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Legel.DESKTOP-RKOK0RG\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -79,7 +79,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.303/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.400/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
