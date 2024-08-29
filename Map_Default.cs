@@ -94,7 +94,7 @@ namespace FLORENCE_Client
 
                     public void Draw_Triangle()
                     {
-                        GL.DrawArrays(PrimitiveType.Triangles, 0, 3);
+                        GL.DrawArrays(PrimitiveType.Triangles, 0, 36);
                     }
 
                     public void Draw_Hexagon()

@@ -140,6 +140,8 @@ namespace FLORENCE_Client
                                 0.1f, 
                                 100.0f
                             );
+
+                            GL.Enable(EnableCap.DepthTest);
                         }
 
                         protected override void OnRenderFrame(FrameEventArgs e)
@@ -148,8 +150,10 @@ namespace FLORENCE_Client
 
                             time += 4.0 * e.Time;
 
-                            GL.Clear(ClearBufferMask.ColorBufferBit);
-
+                            GL.Clear(
+                                ClearBufferMask.ColorBufferBit | 
+                                ClearBufferMask.DepthBufferBit
+                            );
                             GL.BindVertexArray(VertexArrayObject);
 
                             texture0.Use(TextureUnit.Texture0);
@@ -169,8 +173,8 @@ namespace FLORENCE_Client
                             GL.Uniform4(vertexColorLocation, 0.0f, greenValue, 0.0f, 1.0f);
 // change colour with time /\ /\ /\
 */
-                            //FLORENCE_Client.Program.Get_Framework().Get_Client().Get_Data().Get_Map_Default().Draw_Triangle();
-                            FLORENCE_Client.Program.Get_Framework().Get_Client().Get_Data().Get_Map_Default().Draw_Square(FLORENCE_Client.Program.Get_Framework().Get_Client().Get_Data());
+                            FLORENCE_Client.Program.Get_Framework().Get_Client().Get_Data().Get_Map_Default().Draw_Triangle();
+                            //FLORENCE_Client.Program.Get_Framework().Get_Client().Get_Data().Get_Map_Default().Draw_Square(FLORENCE_Client.Program.Get_Framework().Get_Client().Get_Data());
                             
                             SwapBuffers();
                         }

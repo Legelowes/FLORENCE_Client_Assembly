@@ -16,11 +16,47 @@ namespace FLORENCE_Client
                     //private FLORENCE_Client.FrameworkSpace.ClientSpace.DataSpace.OutputSpace.Graphics graphics;
 
                     private static float[] vertices = {
-                        //Position          Texture coordinates
-                         0.5f,  0.5f, 0.0f, 1.0f, 1.0f, // top right
-                         0.5f, -0.5f, 0.0f, 1.0f, 0.0f, // bottom right
-                        -0.5f, -0.5f, 0.0f, 0.0f, 0.0f, // bottom left
-                        -0.5f,  0.5f, 0.0f, 0.0f, 1.0f  // top left
+                        -0.5f, -0.5f, -0.5f,  0.0f, 0.0f,
+                         0.5f, -0.5f, -0.5f,  1.0f, 0.0f,
+                         0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
+                         0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
+                        -0.5f,  0.5f, -0.5f,  0.0f, 1.0f,
+                        -0.5f, -0.5f, -0.5f,  0.0f, 0.0f,
+
+                        -0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
+                         0.5f, -0.5f,  0.5f,  1.0f, 0.0f,
+                         0.5f,  0.5f,  0.5f,  1.0f, 1.0f,
+                         0.5f,  0.5f,  0.5f,  1.0f, 1.0f,
+                        -0.5f,  0.5f,  0.5f,  0.0f, 1.0f,
+                        -0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
+
+                        -0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
+                        -0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
+                        -0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
+                        -0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
+                        -0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
+                        -0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
+
+                         0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
+                         0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
+                         0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
+                         0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
+                         0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
+                         0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
+
+                        -0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
+                         0.5f, -0.5f, -0.5f,  1.0f, 1.0f,
+                         0.5f, -0.5f,  0.5f,  1.0f, 0.0f,
+                         0.5f, -0.5f,  0.5f,  1.0f, 0.0f,
+                        -0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
+                        -0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
+
+                        -0.5f,  0.5f, -0.5f,  0.0f, 1.0f,
+                         0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
+                         0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
+                         0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
+                        -0.5f,  0.5f,  0.5f,  0.0f, 0.0f,
+                        -0.5f,  0.5f, -0.5f,  0.0f, 1.0f
                     };
                     private static uint[] indices = {  // note that we start from 0!
                         0, 1, 3,   // first triangle
