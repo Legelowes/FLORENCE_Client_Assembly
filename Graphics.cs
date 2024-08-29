@@ -3,7 +3,7 @@ using OpenTK.Mathematics;
 using OpenTK.Windowing.Common;
 using OpenTK.Windowing.GraphicsLibraryFramework;
 using OpenTK.Windowing.Desktop;
-using System.Reflection;
+using FLORENCE_Client.FrameworkSpace.ClientSpace.DataSpace.OutputSpace.GraphicsSpace;
 
 namespace FLORENCE_Client
 {
@@ -25,6 +25,12 @@ namespace FLORENCE_Client
                         
                         private FLORENCE_Client.FrameworkSpace.ClientSpace.DataSpace.OutputSpace.GraphicsSpace.Texture texture0;
                         private FLORENCE_Client.FrameworkSpace.ClientSpace.DataSpace.OutputSpace.GraphicsSpace.Texture texture1;
+
+                        private FLORENCE_Client.FrameworkSpace.ClientSpace.DataSpace.OutputSpace.GraphicsSpace.Camera camera;
+
+                        private bool _firstMove = true;
+
+                        private Vector2 _lastPos;
 
                         private Matrix4 view;
                         private Matrix4 projection;
@@ -111,10 +117,10 @@ namespace FLORENCE_Client
                             );
                             GL.EnableVertexAttribArray(1);
 
-                            texture0 = new FLORENCE_Client.FrameworkSpace.ClientSpace.DataSpace.OutputSpace.GraphicsSpace.Texture("..\\..\\..\\Textures\\container.jpg");
+                            texture0 = FLORENCE_Client.FrameworkSpace.ClientSpace.DataSpace.OutputSpace.GraphicsSpace.Texture.LoadFromFile("..\\..\\..\\Textures\\container.jpg");
                             texture0.Use(TextureUnit.Texture0);
 
-                            texture1 = new FLORENCE_Client.FrameworkSpace.ClientSpace.DataSpace.OutputSpace.GraphicsSpace.Texture("..\\..\\..\\Textures\\awesomeface.png");
+                            texture1 = FLORENCE_Client.FrameworkSpace.ClientSpace.DataSpace.OutputSpace.GraphicsSpace.Texture.LoadFromFile("..\\..\\..\\Textures\\awesomeface.png");
                             texture1.Use(TextureUnit.Texture1);
 
                             nrAttributes = 0;
@@ -124,15 +130,9 @@ namespace FLORENCE_Client
                             shader.SetInt("texture0", 0);
                             shader.SetInt("texture1", 1);
 
-                            GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureWrapS, (int)TextureWrapMode.Repeat);
-                            GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureWrapT, (int)TextureWrapMode.Repeat);
-
-                            GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMinFilter, (int)TextureMinFilter.Nearest);
-                            GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMagFilter, (int)TextureMagFilter.Linear);
-
-                            GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMinFilter, (int)TextureMinFilter.LinearMipmapLinear);
-                            GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMagFilter, (int)TextureMagFilter.Linear);
-
+                            camera = new Camera(Vector3.UnitZ * 3, Size.X / (float)Size.Y);
+                            //CursorState = CursorState.Grabbed;
+                            /*
                             view = Matrix4.CreateTranslation(0.0f, 0.0f, -3.0f);
                             projection = Matrix4.CreatePerspectiveFieldOfView(
                                 MathHelper.DegreesToRadians(45f), 
@@ -140,7 +140,7 @@ namespace FLORENCE_Client
                                 0.1f, 
                                 100.0f
                             );
-
+                            */
                             GL.Enable(EnableCap.DepthTest);
                         }
 
@@ -161,10 +161,9 @@ namespace FLORENCE_Client
                             shader.Use();
 
                             var model = Matrix4.Identity * Matrix4.CreateRotationX((float)MathHelper.DegreesToRadians(time));
-
                             shader.SetMatrix4("model", model);
-                            shader.SetMatrix4("view", view);
-                            shader.SetMatrix4("projection", projection);
+                            shader.SetMatrix4("view", camera.GetViewMatrix());
+                            shader.SetMatrix4("projection", camera.GetProjectionMatrix());
                             
 /*
 // change colour with time \/ \/ \/
@@ -199,19 +198,81 @@ namespace FLORENCE_Client
                         protected override void OnUpdateFrame(FrameEventArgs e)
                         {
                             base.OnUpdateFrame(e);
+
+                            if (!IsFocused) // Check to see if the window is focused
+                            {
+                                return;
+                            }
+
                             if (KeyboardState.IsKeyDown(Keys.Escape))
                             {
                                 this.Close();
                             }
+
+                            const float cameraSpeed = 1.5f;
+                            const float sensitivity = 0.2f;
+
+                            if (KeyboardState.IsKeyDown(Keys.W))
+                            {
+                                camera.Position += camera.Front * cameraSpeed * (float)e.Time; // Forward
+                            }
+
+                            if (KeyboardState.IsKeyDown(Keys.S))
+                            {
+                                camera.Position -= camera.Front * cameraSpeed * (float)e.Time; // Backwards
+                            }
+                            if (KeyboardState.IsKeyDown(Keys.A))
+                            {
+                                camera.Position -= camera.Right * cameraSpeed * (float)e.Time; // Left
+                            }
+                            if (KeyboardState.IsKeyDown(Keys.D))
+                            {
+                                camera.Position += camera.Right * cameraSpeed * (float)e.Time; // Right
+                            }
+                            if (KeyboardState.IsKeyDown(Keys.Space))
+                            {
+                                camera.Position += camera.Up * cameraSpeed * (float)e.Time; // Up
+                            }
+                            if (KeyboardState.IsKeyDown(Keys.LeftShift))
+                            {
+                                camera.Position -= camera.Up * cameraSpeed * (float)e.Time; // Down
+                            }
+
+                            // Get the mouse state
+                            var mouse = MouseState;
+
+                            if (_firstMove) // This bool variable is initially set to true.
+                            {
+                                _lastPos = new Vector2(mouse.X, mouse.Y);
+                                _firstMove = false;
+                            }
+                            else
+                            {
+                                // Calculate the offset of the mouse position
+                                var deltaX = mouse.X - _lastPos.X;
+                                var deltaY = mouse.Y - _lastPos.Y;
+                                _lastPos = new Vector2(mouse.X, mouse.Y);
+
+                                // Apply the camera pitch and yaw (we clamp the pitch in the camera class)
+                                camera.Yaw += deltaX * sensitivity;
+                                camera.Pitch -= deltaY * sensitivity; // Reversed since y-coordinates range from bottom to top
+                            }
+                        }
+                        protected override void OnMouseWheel(MouseWheelEventArgs e)
+                        {
+                            base.OnMouseWheel(e);
+
+                            camera.Fov -= e.OffsetY;
                         }
                         /*
-                        public static float Get_New_greenValue()
-                        {
-                            periodOfRefresh += 0.0166666666666667;//period per frame - settings gws.UpdateFrequency = 60
-                            if (periodOfRefresh == 2000) periodOfRefresh = 0;
-                            return (float)Math.Sin(periodOfRefresh) / (2.0f + 0.5f);
-                        }
-                        */
+public static float Get_New_greenValue()
+{
+    periodOfRefresh += 0.0166666666666667;//period per frame - settings gws.UpdateFrequency = 60
+    if (periodOfRefresh == 2000) periodOfRefresh = 0;
+    return (float)Math.Sin(periodOfRefresh) / (2.0f + 0.5f);
+}
+*/
+
                     }
                 }
             }
