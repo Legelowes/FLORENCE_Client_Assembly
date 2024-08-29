@@ -1,8 +1,8 @@
 # Tutorial
 
-OpenTK TUTORIAL => https://opentk.net/learn/chapter1/9-camera.html?tabs=input-opentk4%2Cdelta-time-input-opentk4%2Ccursor-mode-opentk4%2Cmouse-move-opentk4%2Cscroll-opentk4
+OpenTK TUTORIAL => https://opentk.net/learn/chapter2/index.html
 
-1.9. Camera
+2. Lighting
 
 # FLORENCE - Full Stack Development
 ## Client, For Full Stack Development
