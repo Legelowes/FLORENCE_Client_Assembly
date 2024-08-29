@@ -31,3 +31,4 @@ C:\Users\Legel.DESKTOP-RKOK0RG\source\repos\FLORENCE_Client_Assembly\obj\Debug\n
 C:\Users\Legel.DESKTOP-RKOK0RG\source\repos\FLORENCE_Client_Assembly\obj\Debug\net8.0\FLORENCE_Client_Assembly.pdb
 C:\Users\Legel.DESKTOP-RKOK0RG\source\repos\FLORENCE_Client_Assembly\obj\Debug\net8.0\FLORENCE_Client_Assembly.genruntimeconfig.cache
 C:\Users\Legel.DESKTOP-RKOK0RG\source\repos\FLORENCE_Client_Assembly\obj\Debug\net8.0\ref\FLORENCE_Client_Assembly.dll
+C:\Users\Legel.DESKTOP-RKOK0RG\Source\Repos\FLORENCE_Client_Assembly\obj\Debug\net8.0\FLORENCE_Client_Assembly.sourcelink.json

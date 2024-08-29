@@ -3,6 +3,7 @@ using OpenTK.Mathematics;
 using OpenTK.Windowing.Common;
 using OpenTK.Windowing.GraphicsLibraryFramework;
 using OpenTK.Windowing.Desktop;
+using System.Reflection;
 
 namespace FLORENCE_Client
 {
@@ -19,12 +20,17 @@ namespace FLORENCE_Client
                         private int ElementBufferObject;
                         private int VertexArrayObject;
                         private int VertexBufferObject;
+
                         private FLORENCE_Client.FrameworkSpace.ClientSpace.DataSpace.OutputSpace.GraphicsSpace.Shader shader;
+                        
                         private FLORENCE_Client.FrameworkSpace.ClientSpace.DataSpace.OutputSpace.GraphicsSpace.Texture texture0;
                         private FLORENCE_Client.FrameworkSpace.ClientSpace.DataSpace.OutputSpace.GraphicsSpace.Texture texture1;
 
+                        private Matrix4 view;
+                        private Matrix4 projection;
+
                         private static int nrAttributes;
-                        private static double periodOfRefresh;
+                        private static double time;
 
                         public Graphics(OpenTK.Windowing.Desktop.GameWindowSettings gws, OpenTK.Windowing.Desktop.NativeWindowSettings nws) : base(
                            gws,
@@ -47,6 +53,7 @@ namespace FLORENCE_Client
                         protected override void OnLoad()
                         {
                             base.OnLoad();
+
                             GL.ClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 
                             VertexArrayObject = GL.GenVertexArray();
@@ -125,29 +132,36 @@ namespace FLORENCE_Client
 
                             GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMinFilter, (int)TextureMinFilter.LinearMipmapLinear);
                             GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMagFilter, (int)TextureMagFilter.Linear);
+
+                            view = Matrix4.CreateTranslation(0.0f, 0.0f, -3.0f);
+                            projection = Matrix4.CreatePerspectiveFieldOfView(
+                                MathHelper.DegreesToRadians(45f), 
+                                Size.X / (float)Size.Y, 
+                                0.1f, 
+                                100.0f
+                            );
                         }
 
                         protected override void OnRenderFrame(FrameEventArgs e)
                         {
                             base.OnRenderFrame(e);
 
+                            time += 4.0 * e.Time;
+
                             GL.Clear(ClearBufferMask.ColorBufferBit);
 
                             GL.BindVertexArray(VertexArrayObject);
-
-                            var transform = Matrix4.Identity;
-
-                            transform = transform * Matrix4.CreateRotationZ(MathHelper.DegreesToRadians(90.0f));
-
-                            transform = transform * Matrix4.CreateScale(0.5f, 0.5f, 0.5f);
-
-                            transform = transform * Matrix4.CreateTranslation(0.1f, 0.1f, 0.0f);
 
                             texture0.Use(TextureUnit.Texture0);
                             texture1.Use(TextureUnit.Texture1);
                             shader.Use();
 
-                            shader.SetMatrix4("transform", transform);
+                            var model = Matrix4.Identity * Matrix4.CreateRotationX((float)MathHelper.DegreesToRadians(time));
+
+                            shader.SetMatrix4("model", model);
+                            shader.SetMatrix4("view", view);
+                            shader.SetMatrix4("projection", projection);
+                            
 /*
 // change colour with time \/ \/ \/
                             float greenValue = Get_New_greenValue();
@@ -186,13 +200,14 @@ namespace FLORENCE_Client
                                 this.Close();
                             }
                         }
-
+                        /*
                         public static float Get_New_greenValue()
                         {
                             periodOfRefresh += 0.0166666666666667;//period per frame - settings gws.UpdateFrequency = 60
                             if (periodOfRefresh == 2000) periodOfRefresh = 0;
                             return (float)Math.Sin(periodOfRefresh) / (2.0f + 0.5f);
                         }
+                        */
                     }
                 }
             }
